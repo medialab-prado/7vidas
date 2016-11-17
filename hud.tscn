@@ -1,11 +1,7 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://hud.gd" type="Script" id=1]
-[ext_resource path="res://Platformer/HUD/background.png" type="Texture" id=2]
-[ext_resource path="res://Platformer/HUD/blueKey.png" type="Texture" id=3]
-[ext_resource path="res://Platformer/HUD/greenKey.png" type="Texture" id=4]
-[ext_resource path="res://Platformer/HUD/redKey.png" type="Texture" id=5]
-[ext_resource path="res://Platformer/HUD/yellowKey.png" type="Texture" id=6]
+[ext_resource path="res://Platformer/HUD/key.png" type="Texture" id=2]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -15,39 +11,9 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 script/script = ExtResource( 1 )
 
-[node name="background" type="Sprite" parent="."]
+[node name="key" type="Sprite" parent="."]
 
-transform/pos = Vector2( 384, 32 )
-transform/scale = Vector2( 48, 1 )
+transform/pos = Vector2( 69, 566 )
 texture = ExtResource( 2 )
-__meta__ = { "_edit_lock_":true }
-
-[node name="blue key" type="Sprite" parent="."]
-
-transform/pos = Vector2( 288, 32 )
-texture = ExtResource( 3 )
-hframes = 2
-__meta__ = { "_edit_lock_":true }
-
-[node name="green key" type="Sprite" parent="."]
-
-transform/pos = Vector2( 336, 32 )
-texture = ExtResource( 4 )
-hframes = 2
-__meta__ = { "_edit_lock_":true }
-
-[node name="red key" type="Sprite" parent="."]
-
-transform/pos = Vector2( 384, 32 )
-texture = ExtResource( 5 )
-hframes = 2
-__meta__ = { "_edit_lock_":true }
-
-[node name="yellow key" type="Sprite" parent="."]
-
-transform/pos = Vector2( 432, 32 )
-texture = ExtResource( 6 )
-hframes = 2
-__meta__ = { "_edit_lock_":true }
 
 

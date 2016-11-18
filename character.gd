@@ -4,7 +4,7 @@ var object_moves = true
 var idle_timer
 
 func _ready():
-	idle_timer = get_tree().get_root().get_node("game/idle timer")
+	idle_timer = get_node("/root/game/idle timer")
 	randomize()
 	set_pos(Vector2(rand_range(110,1000),-100))
 	set_rot(rand_range(-0.5,0.5))

@@ -5,7 +5,7 @@ var animation
 var hud
 
 func _ready():
-	timer = get_node("/root/game/map end timer")
+	timer = get_node("/root/game/map exit timer")
 	animation = get_node("door closed/animation")
 	hud = get_node("/root/game/hud")
 

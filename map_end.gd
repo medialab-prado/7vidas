@@ -20,6 +20,8 @@ func _on_map_end_body_enter(body):
 func _on_map_end_body_exit(body):
 	if body.get_name() != "character":
 		return
+	if body.is_frozen():
+		return
 	timer.stop()
 	var pos = animation.get_pos()
 	animation.play_backwards("open")

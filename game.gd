@@ -13,10 +13,11 @@ var packet_peer = PacketPeerUDP.new()
 var rotation = 0
 var maps = []
 var current_map = 0
+var change_map_scn
 var keyboard = false
 var net_input_timer
 var dead_zone = 0.2
-var camera_node
+var camera
 
 func _ready():
 	if medialab_facade:
@@ -30,6 +31,7 @@ func _ready():
 		set_size(OS.get_window_size())
 		get_node("/root").connect("size_changed", self, "new_window_size")
 
+	change_map_scn = load("res://change_map.tscn")
 	maps.append(load("res://map01.tscn"))
 	#maps.append(load("res://map02.scn"))
 
@@ -37,8 +39,9 @@ func _ready():
 	if packet_peer.listen(port) != OK:
 		print("Network: Error listening on port ", port)
 
-	camera_node = get_node("viewport/camera")
+	camera = get_node("viewport/camera")
 	set_process(true)
+	start_map()
 
 func new_window_size():
 	set_size(get_node("/root").get_rect().size)
@@ -60,7 +63,9 @@ func _process(delta):
 	elif keyboard:
 		rotation = 0
 
-	var camera_rotation = camera_node.get_rot()
+	if camera.is_frozen():
+		return
+	var camera_rotation = camera.get_rot()
 	if camera_rotation > rotation:
 		var rotation_speed = (camera_rotation - rotation) * 2
 		if rotation_speed < 0.5:
@@ -76,7 +81,7 @@ func _process(delta):
 		if camera_rotation > rotation:
 			camera_rotation = rotation
 	camera_rotation = clamp(camera_rotation, -1.5708, 1.5708)
-	camera_node.set_rot(camera_rotation)
+	camera.set_rot(camera_rotation)
 
 func process_packet(packet):
 	# This is not the OSC protocol but an ASCII packet resembling the OSC format,
@@ -110,19 +115,21 @@ func process_packet(packet):
 	else:
 		rotation = 0
 
+func start_map():
+	var change_map = change_map_scn.instance()
+	get_node("viewport").add_child(change_map)
+	change_map.start()
+
 func _on_idle_timeout():
-	call_deferred("_deferred_change_map")
+	get_node("map exit timer").stop()
+	var change_map = change_map_scn.instance()
+	get_node("viewport").add_child(change_map)
+	change_map.reload()
 
 func _on_map_exit_timeout():
-	call_deferred("_deferred_change_map")
-
-func _deferred_change_map():
-	var old_map = get_node("viewport/map")
-	remove_child(old_map)
-	old_map.free()
+	get_node("idle timer").stop()
+	var change_map = change_map_scn.instance()
+	get_node("viewport").add_child(change_map)
 	current_map += 1
 	current_map %= maps.size()
-	var new_map = maps[current_map].instance()
-	get_node("viewport").add_child(new_map)
-
-	get_node("/root/game/hud").reset()
+	change_map.next(maps[current_map])

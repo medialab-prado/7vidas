@@ -10,6 +10,7 @@ func reset():
 	set_pos(Vector2(rand_range(110,1000),-100))
 	#set_pos(Vector2(400,3200))
 	set_rot(rand_range(-0.5,0.5))
+	show()
 
 func _enter_tree():
 	reset()

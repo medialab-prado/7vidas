@@ -18,15 +18,17 @@ var keyboard = false
 var net_input_timer
 var dead_zone = 0.2
 var camera
+var hud
 
 func _ready():
+	hud = get_node("hud")
 	if medialab_facade:
 		var offset = Vector2(40, 40)
 		OS.set_window_fullscreen(true)
 		set_pos(offset)
 		set_size(Vector2(192,157))
-		get_node("hud").set_scale(Vector2(0.25, 0.25))
-		get_node("hud").set_offset(offset)
+		hud.set_scale(Vector2(0.25, 0.25))
+		hud.set_offset(offset)
 	else:
 		set_size(OS.get_window_size())
 		get_node("/root").connect("size_changed", self, "new_window_size")
@@ -47,7 +49,7 @@ func new_window_size():
 	set_size(get_node("/root").get_rect().size)
 	var scaleX = get_node("/root").get_rect().size.x / 768
 	var scaleY = get_node("/root").get_rect().size.y / 628
-	get_node("hud").set_scale(Vector2(scaleX, scaleY))
+	hud.set_scale(Vector2(scaleX, scaleY))
 
 func _process(delta):
 	if packet_peer.is_listening():
@@ -120,14 +122,14 @@ func start_map():
 	get_node("viewport").add_child(change_map)
 	change_map.start()
 
-func _on_idle_timeout():
+func reload_map():
 	get_node("map exit timer").stop()
 	var change_map = change_map_scn.instance()
 	get_node("viewport").add_child(change_map)
 	change_map.reload()
 
 func _on_map_exit_timeout():
-	get_node("idle timer").stop()
+	hud.idle_countdown_stop()
 	var change_map = change_map_scn.instance()
 	get_node("viewport").add_child(change_map)
 	current_map += 1

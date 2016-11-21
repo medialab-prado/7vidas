@@ -69,13 +69,6 @@ wait_time = 3.0
 one_shot = true
 autostart = false
 
-[node name="idle timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 7.0
-one_shot = true
-autostart = false
-
 [node name="network input timer" type="Timer" parent="."]
 
 process_mode = 1
@@ -84,7 +77,5 @@ one_shot = true
 autostart = false
 
 [connection signal="timeout" from="map exit timer" to="." method="_on_map_exit_timeout"]
-
-[connection signal="timeout" from="idle timer" to="." method="_on_idle_timeout"]
 
 

@@ -1,8 +1,8 @@
 extends RigidBody2D
 
 var object_moves = true
-var idle_timer
 var animation
+var hud
 
 func reset():
 	set_mode(MODE_STATIC)
@@ -15,19 +15,19 @@ func _enter_tree():
 	reset()
 
 func _ready():
-	idle_timer = get_node("/root/game/idle timer")
 	animation = get_node("sprite/animation")
+	hud = get_node("/root/game/hud")
 
 func _integrate_forces(state):
 	var lv = get_linear_velocity()
 	if abs(lv.x) < 16 && abs(lv.y) < 16 && abs(get_angular_velocity()) < 0.5:
 		if object_moves:
 			object_moves = false
-			idle_timer.start()
+			hud.idle_countdown_start()
 	else:
 		if !object_moves:
 			object_moves = true
-			idle_timer.stop()
+			hud.idle_countdown_stop()
 
 func freeze():
 	set_mode(MODE_STATIC)

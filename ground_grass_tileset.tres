@@ -16,159 +16,159 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -64, -56, -56, -64, 64, -64, 64, 64, -56, 64, -64, 56 )
+points = Vector2Array( -33, -29, -29, -33, 31, -33, 31, 31, -29, 31, -33, 27 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -64, -64, 64, -64, 64, 64, -64, 64 )
-
-[sub_resource type="ConvexPolygonShape2D" id=3]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -64, -56, -56, -64, 56, -64, 64, -56, 64, 56, 56, 64, -56, 64, -64, 56 )
-
-[sub_resource type="ConvexPolygonShape2D" id=4]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -64, -56, -56, -64, 56, -64, 64, -56, 64, 56, 56, 64, -56, 64, -64, 56 )
-
-[sub_resource type="ConvexPolygonShape2D" id=5]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -64, -64, 64, -64, 64, 64, -64, 64 )
-
-[sub_resource type="ConvexPolygonShape2D" id=6]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -64, -64, 64, -64, 64, 64, -64, 64 )
-
-[sub_resource type="ConvexPolygonShape2D" id=7]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -64, -56, -56, -64, 64, -64, 64, 64, -64, -20 )
-
-[sub_resource type="ConvexPolygonShape2D" id=8]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -64, -56, -56, -64, 64, -64, 64, 64, 16, 56, -24, 40, -52, 16, -64, -16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=9]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -64, -56, -56, -64, 56, -64, 64, -56, 64, 0, 56, 8, -56, 8, -64, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=10]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -64, -56, -56, -64, 64, -64, 64, 8, -56, 8, -64, 0 )
+points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -64, -64, 64, -64, 64, 8, -64, 8 )
+points = Vector2Array( -32, -28, -28, -32, 28, -32, 32, -28, 32, 28, 28, 32, -28, 32, -32, 28 )
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -64, -64, 64, 64, -64, 64 )
+points = Vector2Array( -32, -28, -28, -32, 28, -32, 32, -28, 32, 28, 28, 32, -28, 32, -32, 28 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 32, -32, -12 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 32, 4, 28, -24, 12, -32, -8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, -28, -28, -32, 28, -32, 32, -28, 32, 0, 28, 4, -28, 4, -32, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 4, -28, 4, -32, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, -32, 32, -32, 32, 4, -32, 4 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, -32, 32, 32, -32, 32 )
 
 [resource]
 
 0/name = "grass left"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
-0/region = Rect2( 0, 0, 128, 128 )
-0/occluder_offset = Vector2( 64, 64 )
-0/navigation_offset = Vector2( 64, 64 )
-0/shape_offset = Vector2( 64, 64 )
+0/region = Rect2( 0, 0, 64, 64 )
+0/occluder_offset = Vector2( 32, 32 )
+0/navigation_offset = Vector2( 32, 32 )
+0/shape_offset = Vector2( 32, 32 )
 0/shapes = [ SubResource( 1 ) ]
 1/name = "grass mid"
 1/texture = ExtResource( 2 )
 1/tex_offset = Vector2( 0, 0 )
-1/region = Rect2( 0, 0, 128, 128 )
-1/occluder_offset = Vector2( 64, 64 )
-1/navigation_offset = Vector2( 64, 64 )
-1/shape_offset = Vector2( 64, 64 )
+1/region = Rect2( 0, 0, 64, 64 )
+1/occluder_offset = Vector2( 32, 32 )
+1/navigation_offset = Vector2( 32, 32 )
+1/shape_offset = Vector2( 32, 32 )
 1/shapes = [ SubResource( 2 ) ]
 2/name = "grass corner left"
 2/texture = ExtResource( 5 )
 2/tex_offset = Vector2( 0, 0 )
-2/region = Rect2( 0, 0, 128, 128 )
-2/occluder_offset = Vector2( 64, 64 )
-2/navigation_offset = Vector2( 64, 64 )
-2/shape_offset = Vector2( 64, 64 )
-2/shapes = [ SubResource( 5 ) ]
+2/region = Rect2( 0, 0, 64, 64 )
+2/occluder_offset = Vector2( 32, 32 )
+2/navigation_offset = Vector2( 32, 32 )
+2/shape_offset = Vector2( 32, 32 )
+2/shapes = [ SubResource( 3 ) ]
 3/name = "grass center"
 3/texture = ExtResource( 6 )
 3/tex_offset = Vector2( 0, 0 )
-3/region = Rect2( 0, 0, 128, 128 )
-3/occluder_offset = Vector2( 64, 64 )
-3/navigation_offset = Vector2( 64, 64 )
-3/shape_offset = Vector2( 64, 64 )
-3/shapes = [ SubResource( 6 ) ]
+3/region = Rect2( 0, 0, 64, 64 )
+3/occluder_offset = Vector2( 32, 32 )
+3/navigation_offset = Vector2( 32, 32 )
+3/shape_offset = Vector2( 32, 32 )
+3/shapes = [ SubResource( 4 ) ]
 4/name = "grass cliff left"
 4/texture = ExtResource( 7 )
 4/tex_offset = Vector2( 0, 0 )
-4/region = Rect2( 0, 0, 128, 128 )
-4/occluder_offset = Vector2( 64, 64 )
-4/navigation_offset = Vector2( 64, 64 )
-4/shape_offset = Vector2( 64, 64 )
-4/shapes = [ SubResource( 7 ) ]
+4/region = Rect2( 0, 0, 64, 64 )
+4/occluder_offset = Vector2( 32, 32 )
+4/navigation_offset = Vector2( 32, 32 )
+4/shape_offset = Vector2( 32, 32 )
+4/shapes = [ SubResource( 5 ) ]
 5/name = "grass cliff left round"
 5/texture = ExtResource( 8 )
 5/tex_offset = Vector2( 0, 0 )
-5/region = Rect2( 0, 0, 128, 128 )
-5/occluder_offset = Vector2( 64, 64 )
-5/navigation_offset = Vector2( 64, 64 )
-5/shape_offset = Vector2( 64, 64 )
-5/shapes = [ SubResource( 8 ) ]
+5/region = Rect2( 0, 0, 64, 64 )
+5/occluder_offset = Vector2( 32, 32 )
+5/navigation_offset = Vector2( 32, 32 )
+5/shape_offset = Vector2( 32, 32 )
+5/shapes = [ SubResource( 6 ) ]
 6/name = "grass half"
 6/texture = ExtResource( 9 )
 6/tex_offset = Vector2( 0, 0 )
-6/region = Rect2( 0, 0, 128, 128 )
-6/occluder_offset = Vector2( 64, 64 )
-6/navigation_offset = Vector2( 64, 64 )
-6/shape_offset = Vector2( 64, 64 )
-6/shapes = [ SubResource( 9 ) ]
+6/region = Rect2( 0, 0, 64, 64 )
+6/occluder_offset = Vector2( 32, 32 )
+6/navigation_offset = Vector2( 32, 32 )
+6/shape_offset = Vector2( 32, 32 )
+6/shapes = [ SubResource( 7 ) ]
 7/name = "grass half left"
 7/texture = ExtResource( 10 )
 7/tex_offset = Vector2( 0, 0 )
-7/region = Rect2( 0, 0, 128, 128 )
-7/occluder_offset = Vector2( 64, 64 )
-7/navigation_offset = Vector2( 64, 64 )
-7/shape_offset = Vector2( 64, 64 )
-7/shapes = [ SubResource( 10 ) ]
+7/region = Rect2( 0, 0, 64, 64 )
+7/occluder_offset = Vector2( 32, 32 )
+7/navigation_offset = Vector2( 32, 32 )
+7/shape_offset = Vector2( 32, 32 )
+7/shapes = [ SubResource( 8 ) ]
 8/name = "grass half mid"
 8/texture = ExtResource( 11 )
 8/tex_offset = Vector2( 0, 0 )
-8/region = Rect2( 0, 0, 128, 128 )
-8/occluder_offset = Vector2( 64, 64 )
-8/navigation_offset = Vector2( 64, 64 )
-8/shape_offset = Vector2( 64, 64 )
-8/shapes = [ SubResource( 11 ) ]
+8/region = Rect2( 0, 0, 64, 64 )
+8/occluder_offset = Vector2( 32, 32 )
+8/navigation_offset = Vector2( 32, 32 )
+8/shape_offset = Vector2( 32, 32 )
+8/shapes = [ SubResource( 9 ) ]
 9/name = "grass hill left"
 9/texture = ExtResource( 12 )
 9/tex_offset = Vector2( 0, 0 )
-9/region = Rect2( 0, 0, 128, 128 )
-9/occluder_offset = Vector2( 64, 64 )
-9/navigation_offset = Vector2( 64, 64 )
-9/shape_offset = Vector2( 64, 64 )
-9/shapes = [ SubResource( 12 ) ]
+9/region = Rect2( 0, 0, 64, 64 )
+9/occluder_offset = Vector2( 32, 32 )
+9/navigation_offset = Vector2( 32, 32 )
+9/shape_offset = Vector2( 32, 32 )
+9/shapes = [ SubResource( 10 ) ]
 10/name = "grass"
 10/texture = ExtResource( 3 )
 10/tex_offset = Vector2( 0, 0 )
-10/region = Rect2( 0, 0, 128, 128 )
-10/occluder_offset = Vector2( 64, 64 )
-10/navigation_offset = Vector2( 64, 64 )
-10/shape_offset = Vector2( 64, 64 )
-10/shapes = [ SubResource( 3 ) ]
+10/region = Rect2( 0, 0, 64, 64 )
+10/occluder_offset = Vector2( 32, 32 )
+10/navigation_offset = Vector2( 32, 32 )
+10/shape_offset = Vector2( 32, 32 )
+10/shapes = [ SubResource( 11 ) ]
 11/name = "grass center round"
 11/texture = ExtResource( 4 )
 11/tex_offset = Vector2( 0, 0 )
-11/region = Rect2( 0, 0, 128, 128 )
-11/occluder_offset = Vector2( 64, 64 )
-11/navigation_offset = Vector2( 64, 64 )
-11/shape_offset = Vector2( 64, 64 )
-11/shapes = [ SubResource( 4 ) ]
+11/region = Rect2( 0, 0, 64, 64 )
+11/occluder_offset = Vector2( 32, 32 )
+11/navigation_offset = Vector2( 32, 32 )
+11/shape_offset = Vector2( 32, 32 )
+11/shapes = [ SubResource( 12 ) ]
 

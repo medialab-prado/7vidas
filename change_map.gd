@@ -5,11 +5,13 @@ var timer2
 var next_map = null
 var gameview_path = "/root/game/viewport"
 var map_path = "/root/game/viewport/map"
+var hud
 var hud_path = "/root/game/hud"
 
 func _ready():
 	timer1 = get_node("timer1")
 	timer2 = get_node("timer2")
+	hud = get_node(hud_path)
 
 func start():
 	timer2.start()
@@ -29,7 +31,6 @@ func _on_timeout_1():
 		old_map.free()
 		var new_map = next_map.instance()
 		get_node(gameview_path).add_child(new_map)
-		get_node(hud_path).reset()
 	else:
 		get_node(map_path).reset()
 	timer2.start()

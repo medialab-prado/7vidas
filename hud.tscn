@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://hud.gd" type="Script" id=1]
 [ext_resource path="res://Platformer/HUD/key.png" type="Texture" id=2]
@@ -11,12 +11,14 @@
 [ext_resource path="res://Platformer/HUD/7.png" type="Texture" id=9]
 [ext_resource path="res://Platformer/HUD/8.png" type="Texture" id=10]
 [ext_resource path="res://Platformer/HUD/9.png" type="Texture" id=11]
+[ext_resource path="res://Fonts/kenpixel32.fnt" type="BitmapFont" id=12]
+[ext_resource path="res://Fonts/kenpixel64.fnt" type="BitmapFont" id=13]
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ { "frames":[ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ], "loop":true, "name":"default", "speed":5.0 } ]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 
 resource/name = "idle countdown"
 length = 9.0
@@ -56,7 +58,7 @@ texture = ExtResource( 2 )
 visibility/opacity = 0.0
 transform/pos = Vector2( 384.902, 525.185 )
 transform/scale = Vector2( 0.1, 0.1 )
-frames = SubResource( 5 )
+frames = SubResource( 1 )
 animation = "default"
 frame = 8
 
@@ -65,12 +67,72 @@ frame = 8
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-"anims/idle countdown" = SubResource( 6 )
+"anims/idle countdown" = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
+[node name="time label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 288.0
+margin/top = 4.0
+margin/right = 480.0
+margin/bottom = 40.0
+custom_fonts/font = ExtResource( 12 )
+text = "0:35"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="map info 1" type="Label" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 40.0
+margin/top = 132.0
+margin/right = 728.0
+margin/bottom = 204.0
+custom_fonts/font = ExtResource( 13 )
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="map info 2" type="Label" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 40.0
+margin/top = 460.0
+margin/right = 728.0
+margin/bottom = 496.0
+custom_fonts/font = ExtResource( 12 )
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="map timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
 [connection signal="finished" from="numbers/animation" to="." method="_on_countdown_finished"]
+
+[connection signal="timeout" from="map timer" to="." method="_on_map_timeout"]
 
 

@@ -133,6 +133,7 @@ func start_map():
 
 func reload_map():
 	get_node("map exit timer").stop()
+	# TODO: Check remaining lives
 	change_map().reload()
 
 func _on_map_exit_timeout():

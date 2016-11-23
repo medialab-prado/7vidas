@@ -6,6 +6,8 @@ extends Container
 # http://medialab-prado.es/article/fachada_digital_informacion_tecnica
 
 export var medialab_facade = false
+var facade_offset = Vector2(40, 40)
+var facade_size = Vector2(192,157)
 
 var port = 29095
 var packet_peer = PacketPeerUDP.new()
@@ -23,12 +25,10 @@ var hud
 func _ready():
 	hud = get_node("hud")
 	if medialab_facade:
-		var offset = Vector2(40, 40)
 		OS.set_window_fullscreen(true)
-		set_pos(offset)
-		set_size(Vector2(192,157))
-		hud.set_scale(Vector2(0.25, 0.25))
-		hud.set_offset(offset)
+		set_pos(facade_offset)
+		set_size(facade_size)
+		resize_for_facade(hud)
 	else:
 		set_size(OS.get_window_size())
 		get_node("/root").connect("size_changed", self, "new_window_size")
@@ -44,6 +44,11 @@ func _ready():
 	camera = get_node("viewport/camera")
 	set_process(true)
 	start_map()
+
+func resize_for_facade(layer):
+	if medialab_facade:
+		layer.set_scale(Vector2(0.25, 0.25))
+		layer.set_offset(facade_offset)
 
 func new_window_size():
 	set_size(get_node("/root").get_rect().size)
@@ -117,21 +122,21 @@ func process_packet(packet):
 	else:
 		rotation = 0
 
-func start_map():
+func change_map():
 	var change_map = change_map_scn.instance()
-	get_node("viewport").add_child(change_map)
-	change_map.start()
+	resize_for_facade(change_map)
+	get_node("/root/game").add_child(change_map)
+	return change_map
+
+func start_map():
+	change_map().start()
 
 func reload_map():
 	get_node("map exit timer").stop()
-	var change_map = change_map_scn.instance()
-	get_node("viewport").add_child(change_map)
-	change_map.reload()
+	change_map().reload()
 
 func _on_map_exit_timeout():
 	hud.idle_countdown_stop()
-	var change_map = change_map_scn.instance()
-	get_node("viewport").add_child(change_map)
 	current_map += 1
 	current_map %= maps.size()
-	change_map.next(maps[current_map])
+	change_map().next(maps[current_map])

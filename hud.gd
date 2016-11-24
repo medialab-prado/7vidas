@@ -63,6 +63,12 @@ func enable_key():
 	key_taken = true
 	key.show()
 
+func time_bonus(seconds):
+	var new_time = map_timer.get_time_left() + seconds
+	map_timer.stop()
+	map_timer.set_wait_time(new_time)
+	map_timer.start()
+
 func start_map():
 	map_timer.set_wait_time(time_left)
 	map_timer.start()

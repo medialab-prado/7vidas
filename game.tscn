@@ -62,13 +62,6 @@ script/script = ExtResource( 3 )
 
 [node name="map" parent="viewport" instance=ExtResource( 4 )]
 
-[node name="map exit timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 3.0
-one_shot = true
-autostart = false
-
 [node name="network input timer" type="Timer" parent="."]
 
 process_mode = 1
@@ -76,6 +69,22 @@ wait_time = 0.05
 one_shot = true
 autostart = false
 
-[connection signal="timeout" from="map exit timer" to="." method="_on_map_exit_timeout"]
+[node name="next map timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
+[node name="start map timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="next map timer" to="." method="_on_next_map_timeout"]
+
+[connection signal="timeout" from="start map timer" to="." method="_on_start_map_timeout"]
 
 

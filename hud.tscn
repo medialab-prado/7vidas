@@ -131,8 +131,17 @@ wait_time = 1.0
 one_shot = true
 autostart = false
 
+[node name="hint timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
 [connection signal="finished" from="numbers/animation" to="." method="_on_countdown_finished"]
 
 [connection signal="timeout" from="map timer" to="." method="_on_map_timeout"]
+
+[connection signal="timeout" from="hint timer" to="." method="_on_hint_timeout"]
 
 

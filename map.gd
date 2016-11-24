@@ -14,18 +14,19 @@ func _ready():
 	camera = get_node(camera_path)
 	camera.reset()
 	hud = get_node(hud_path)
-	hud.reset(map_name, time_limit)
-
-func freeze():
-	camera.freeze()
-	character.freeze()
+	hud.reset(map_name, time_limit, true)
 
 func run():
 	camera.run()
 	character.run()
 	hud.start_map()
 
+func finish():
+	camera.freeze()
+	character.freeze()
+	hud.end_map()
+
 func reset():
 	character.reset()
 	camera.reset()
-	hud.try_again()
+	hud.reset(map_name, time_limit, false)

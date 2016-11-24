@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=1]
 
-[ext_resource path="res://map_end.gd" type="Script" id=1]
+[ext_resource path="res://exit_door.gd" type="Script" id=1]
 [ext_resource path="res://Platformer/door_open.png" type="Texture" id=2]
 [ext_resource path="res://Platformer/door_closed.png" type="Texture" id=3]
 
@@ -60,8 +60,10 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[connection signal="body_enter" from="." to="." method="_on_map_end_body_enter"]
+[connection signal="body_enter" from="." to="." method="_on_exit_door_body_enter"]
 
-[connection signal="body_exit" from="." to="." method="_on_map_end_body_exit"]
+[connection signal="body_exit" from="." to="." method="_on_exit_door_body_exit"]
+
+[connection signal="finished" from="door closed/animation" to="." method="_on_animation_finished"]
 
 

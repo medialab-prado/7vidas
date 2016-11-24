@@ -7,7 +7,7 @@ extends Container
 
 export var medialab_facade = false
 var facade_offset = Vector2(40, 40)
-var facade_size = Vector2(192,157)
+var facade_size = Vector2(192, 157)
 
 var port = 29095
 var packet_peer = PacketPeerUDP.new()
@@ -15,15 +15,21 @@ var packet_peer = PacketPeerUDP.new()
 var rotation = 0
 var maps = []
 var current_map = 0
-var change_map_scn
 var keyboard = false
 var net_input_timer
 var dead_zone = 0.2
+var gameview_path = "/root/game/viewport"
+var map_path = "/root/game/viewport/map"
 var camera
 var hud
+var next_map_timer
+var start_map_timer
 
 func _ready():
 	hud = get_node("hud")
+	next_map_timer = get_node("next map timer")
+	start_map_timer = get_node("start map timer")
+
 	if medialab_facade:
 		OS.set_window_fullscreen(true)
 		set_pos(facade_offset)
@@ -33,7 +39,6 @@ func _ready():
 		set_size(OS.get_window_size())
 		get_node("/root").connect("size_changed", self, "new_window_size")
 
-	change_map_scn = load("res://change_map.tscn")
 	maps.append(load("res://map01.tscn"))
 	#maps.append(load("res://map02.scn"))
 
@@ -43,7 +48,7 @@ func _ready():
 
 	camera = get_node("viewport/camera")
 	set_process(true)
-	start_map()
+	start_map_timer.start()
 
 func resize_for_facade(layer):
 	if medialab_facade:
@@ -122,22 +127,23 @@ func process_packet(packet):
 	else:
 		rotation = 0
 
-func change_map():
-	var change_map = change_map_scn.instance()
-	resize_for_facade(change_map)
-	get_node("/root/game").add_child(change_map)
-	return change_map
-
-func start_map():
-	change_map().start()
-
 func reload_map():
-	get_node("map exit timer").stop()
 	# TODO: Check remaining lives
-	change_map().reload()
+	get_node(map_path).finish()
+	next_map_timer.start()
 
-func _on_map_exit_timeout():
-	hud.idle_countdown_stop()
+func next_map():
+	get_node(map_path).finish()
 	current_map += 1
 	current_map %= maps.size()
-	change_map().next(maps[current_map])
+	next_map_timer.start()
+
+func _on_next_map_timeout():
+	var old_map = get_node(map_path)
+	get_node(gameview_path).remove_child(old_map)
+	old_map.free()
+	get_node(gameview_path).add_child(maps[current_map].instance())
+	start_map_timer.start()
+
+func _on_start_map_timeout():
+	get_node(map_path).run()

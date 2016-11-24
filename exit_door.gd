@@ -12,6 +12,8 @@ func _ready():
 func _on_exit_door_body_enter(body):
 	if body.get_name() != "character":
 		return
+	if body.is_frozen():
+		return
 	if not hud.is_key_taken():
 		hud.show_hint("Find a key to open the door")
 		return
@@ -26,7 +28,7 @@ func _on_exit_door_body_enter(body):
 func _on_exit_door_body_exit(body):
 	if body.get_name() != "character":
 		return
-	if body.is_frozen():
+	if body.is_frozen() or not hud.is_key_taken():
 		return
 	if animation.is_playing():
 		var pos = animation.get_pos()

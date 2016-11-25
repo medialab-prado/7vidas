@@ -44,6 +44,7 @@ func _ready():
 		set_size(OS.get_window_size())
 		get_node("/root").connect("size_changed", self, "new_window_size")
 
+	maps.append(load("res://map_init.tscn"))
 	maps.append(load("res://map01.tscn"))
 	#maps.append(load("res://map02.scn"))
 

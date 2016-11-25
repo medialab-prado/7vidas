@@ -30,3 +30,6 @@ func reset():
 	character.reset()
 	camera.reset()
 	hud.reset(map_name, time_limit, false)
+
+func getCurrentMapName():
+	return map_name

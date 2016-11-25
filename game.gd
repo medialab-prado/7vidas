@@ -5,6 +5,11 @@ extends Container
 # should be kept disabled in any other screen.
 # http://medialab-prado.es/article/fachada_digital_informacion_tecnica
 
+
+# Etherned Code UPD
+# For change Scene: Call : next_map()
+
+
 export var medialab_facade = false
 var facade_offset = Vector2(40, 40)
 var facade_size = Vector2(192, 157)

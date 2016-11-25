@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+# Timer can change scene
+
 var game
 var key
 var key_taken = false

@@ -8,6 +8,7 @@ var next_hint = null
 var hint_timer
 var numbers
 var numbers_anim
+var gems_info_anim
 var time_left
 var time_label
 var current_map_name
@@ -21,6 +22,7 @@ func _ready():
 	key = get_node("key")
 	numbers = get_node("numbers")
 	numbers_anim = get_node("numbers/animation")
+	gems_info_anim = get_node("gems info/animation")
 	time_label = get_node("time label")
 	map_timer = get_node("map timer")
 	map_info1 = get_node("map info 1")
@@ -93,6 +95,10 @@ func time_bonus(seconds):
 	map_timer.stop()
 	map_timer.set_wait_time(new_time)
 	map_timer.start()
+	if seconds == 20:
+		gems_info_anim.queue("rise 20")
+	elif seconds == 5:
+		gems_info_anim.queue("rise 5")
 
 func start_map():
 	map_timer.set_wait_time(time_left)
@@ -101,6 +107,7 @@ func start_map():
 	map_info2.hide()
 
 func end_map(completed):
+	gems_info_anim.clear_queue()
 	idle_countdown_stop()
 	map_timer.stop()
 	if completed:
@@ -130,6 +137,7 @@ func _on_countdown_finished():
 	game.reload_map()
 
 func map_timeout():
+	gems_info_anim.clear_queue()
 	stop_hints()
 	time_left = 0
 	time_label.set_text("0:00")

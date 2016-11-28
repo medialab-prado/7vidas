@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=1]
+[gd_scene load_steps=21 format=1]
 
 [ext_resource path="res://hud.gd" type="Script" id=1]
 [ext_resource path="res://Platformer/HUD/key.png" type="Texture" id=2]
@@ -12,13 +12,15 @@
 [ext_resource path="res://Platformer/HUD/8.png" type="Texture" id=10]
 [ext_resource path="res://Platformer/HUD/9.png" type="Texture" id=11]
 [ext_resource path="res://Fonts/kenpixel32.fnt" type="BitmapFont" id=12]
-[ext_resource path="res://Fonts/kenpixel64.fnt" type="BitmapFont" id=13]
+[ext_resource path="res://Fonts/time20.png" type="Texture" id=13]
+[ext_resource path="res://Fonts/time5.png" type="Texture" id=14]
+[ext_resource path="res://Fonts/kenpixel64.fnt" type="BitmapFont" id=15]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=5]
 
 animations = [ { "frames":[ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ], "loop":true, "name":"default", "speed":5.0 } ]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=6]
 
 resource/name = "idle countdown"
 length = 9.0
@@ -40,6 +42,64 @@ tracks/2/interp = 1
 tracks/2/imported = false
 tracks/2/keys = { "times":FloatArray( 4, 4.95, 5, 5.95, 6, 6.95, 7, 7.95, 8, 8.95, 9 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), "update":0, "values":[ 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0 ] }
 
+[sub_resource type="SpriteFrames" id=7]
+
+animations = [ { "frames":[ ExtResource( 13 ), ExtResource( 14 ) ], "loop":true, "name":"default", "speed":5.0 } ]
+
+[sub_resource type="Animation" id=4]
+
+resource/name = "rise 20"
+length = 1.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.6 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 384, 314 ), Vector2( 384, 120 ) ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.4, 0.8, 1.5 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":0, "values":[ 0.0, 1.0, 1.0, 0.0 ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:transform/scale")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0, 0.8, 1.5 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.5, 0.5 ) ] }
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
+
+[sub_resource type="Animation" id=8]
+
+resource/name = "rise 5"
+length = 1.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.6 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 384, 314 ), Vector2( 384, 120 ) ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.4, 0.8, 1.5 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":0, "values":[ 0.0, 1.0, 1.0, 0.0 ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:transform/scale")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0, 0.8, 1.5 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.5, 0.5 ) ] }
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 1 ] }
+
 [node name="hud" type="CanvasLayer"]
 
 layer = 1
@@ -58,7 +118,7 @@ texture = ExtResource( 2 )
 visibility/opacity = 0.0
 transform/pos = Vector2( 384.902, 525.185 )
 transform/scale = Vector2( 0.1, 0.1 )
-frames = SubResource( 1 )
+frames = SubResource( 5 )
 animation = "default"
 frame = 8
 
@@ -67,7 +127,7 @@ frame = 8
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-"anims/idle countdown" = SubResource( 2 )
+"anims/idle countdown" = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -90,6 +150,27 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="gems info" type="AnimatedSprite" parent="."]
+
+visibility/opacity = 0.0
+transform/pos = Vector2( 384, 314 )
+frames = SubResource( 7 )
+animation = "default"
+frame = 1
+
+[node name="animation" type="AnimationPlayer" parent="gems info"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+"anims/rise 20" = SubResource( 4 )
+"anims/rise 5" = SubResource( 8 )
+"next/rise 5" = ""
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
 [node name="map info 1" type="Label" parent="."]
 
 visibility/visible = false
@@ -101,7 +182,7 @@ margin/left = 40.0
 margin/top = 132.0
 margin/right = 728.0
 margin/bottom = 204.0
-custom_fonts/font = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
 align = 1
 percent_visible = 1.0
 lines_skipped = 0

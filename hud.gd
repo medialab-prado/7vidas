@@ -100,12 +100,13 @@ func start_map():
 	map_info1.hide()
 	map_info2.hide()
 
-func end_map():
+func end_map(completed):
 	idle_countdown_stop()
 	map_timer.stop()
-	map_info1.set_text("Well done")
-	map_info1.show()
-	map_info2.hide()
+	if completed:
+		map_info1.set_text("Well done")
+		map_info1.show()
+		map_info2.hide()
 
 func door_opening(enabled):
 	if not enabled and map_timer.get_time_left() == 0:

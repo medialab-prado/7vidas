@@ -21,10 +21,10 @@ func run():
 	character.run()
 	hud.start_map()
 
-func finish():
+func finish(completed):
 	camera.freeze()
 	character.freeze()
-	hud.end_map()
+	hud.end_map(completed)
 
 func reset():
 	character.reset()

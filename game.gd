@@ -135,11 +135,11 @@ func process_packet(packet):
 
 func reload_map():
 	# TODO: Check remaining lives
-	get_node(map_path).finish()
+	get_node(map_path).finish(false)
 	next_map_timer.start()
 
 func next_map():
-	get_node(map_path).finish()
+	get_node(map_path).finish(true)
 	current_map += 1
 	current_map %= maps.size()
 	next_map_timer.start()

@@ -3,6 +3,8 @@ extends RigidBody2D
 var object_moves = true
 var animation
 var hud
+var do_jump = false
+var jump_force
 
 func reset():
 	set_mode(MODE_STATIC)
@@ -10,6 +12,7 @@ func reset():
 	set_pos(Vector2(rand_range(110,1000),-100))
 	#set_pos(Vector2(400,3200))
 	set_rot(rand_range(-0.5,0.5))
+	do_jump = false
 	show()
 
 func _enter_tree():
@@ -21,6 +24,13 @@ func _ready():
 
 func _integrate_forces(state):
 	var lv = get_linear_velocity()
+
+	if do_jump:
+		set_linear_velocity(Vector2(lv.x, 0))
+		apply_impulse(Vector2(0,0), Vector2(0, -jump_force))
+		do_jump = false
+		return
+
 	if abs(lv.x) < 16 && abs(lv.y) < 16 && abs(get_angular_velocity()) < 0.5:
 		if object_moves:
 			object_moves = false
@@ -32,7 +42,7 @@ func _integrate_forces(state):
 
 func freeze():
 	set_mode(MODE_STATIC)
-	animation.stop_all()
+	animation.stop()
 
 func is_frozen():
 	return (get_mode() == MODE_STATIC)
@@ -41,3 +51,8 @@ func run():
 	set_mode(MODE_RIGID)
 	set_sleeping(false)
 	animation.play("rabbit")
+
+func jump(force = 500):
+	set_pos(get_pos() + Vector2(0, -20))
+	jump_force = force
+	do_jump = true

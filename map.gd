@@ -30,3 +30,18 @@ func reset():
 	character.reset()
 	camera.reset()
 	hud.reset(map_name, time_limit, false)
+
+func _on_body_enter_fatality(body):
+	if body.get_name() != "character":
+		return
+	character.explode()
+
+func _on_body_enter_water(body):
+	if body.get_name() != "character":
+		return
+	character.drown()
+
+func _on_body_enter_lava(body):
+	if body.get_name() != "character":
+		return
+	character.burn()

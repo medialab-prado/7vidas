@@ -16,11 +16,11 @@
 [ext_resource path="res://Fonts/time5.png" type="Texture" id=14]
 [ext_resource path="res://Fonts/kenpixel64.fnt" type="BitmapFont" id=15]
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ { "frames":[ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ], "loop":true, "name":"default", "speed":5.0 } ]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 
 resource/name = "idle countdown"
 length = 9.0
@@ -42,7 +42,7 @@ tracks/2/interp = 1
 tracks/2/imported = false
 tracks/2/keys = { "times":FloatArray( 4, 4.95, 5, 5.95, 6, 6.95, 7, 7.95, 8, 8.95, 9 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), "update":0, "values":[ 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0 ] }
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=3]
 
 animations = [ { "frames":[ ExtResource( 13 ), ExtResource( 14 ) ], "loop":true, "name":"default", "speed":5.0 } ]
 
@@ -73,7 +73,7 @@ tracks/3/interp = 1
 tracks/3/imported = false
 tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 
 resource/name = "rise 5"
 length = 1.5
@@ -118,7 +118,7 @@ texture = ExtResource( 2 )
 visibility/opacity = 0.0
 transform/pos = Vector2( 384.902, 525.185 )
 transform/scale = Vector2( 0.1, 0.1 )
-frames = SubResource( 5 )
+frames = SubResource( 1 )
 animation = "default"
 frame = 8
 
@@ -127,7 +127,7 @@ frame = 8
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-"anims/idle countdown" = SubResource( 6 )
+"anims/idle countdown" = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -154,7 +154,7 @@ max_lines_visible = -1
 
 visibility/opacity = 0.0
 transform/pos = Vector2( 384, 314 )
-frames = SubResource( 7 )
+frames = SubResource( 3 )
 animation = "default"
 frame = 1
 
@@ -164,7 +164,7 @@ playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
 "anims/rise 20" = SubResource( 4 )
-"anims/rise 5" = SubResource( 8 )
+"anims/rise 5" = SubResource( 5 )
 "next/rise 5" = ""
 playback/active = true
 playback/speed = 1.0

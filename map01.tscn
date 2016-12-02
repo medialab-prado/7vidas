@@ -7,7 +7,7 @@
 [ext_resource path="res://key.tscn" type="PackedScene" id=5]
 [ext_resource path="res://gem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://character.tscn" type="PackedScene" id=7]
-[ext_resource path="res://jump-pad.tscn" type="PackedScene" id=8]
+[ext_resource path="res://jump_pad.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
 

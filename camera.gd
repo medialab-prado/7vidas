@@ -1,6 +1,6 @@
 extends Camera2D
 
-var frozen = true
+var frozen = false
 var map_path = "/root/game/viewport/map"
 var character_path = "/root/game/viewport/map/character"
 
@@ -12,7 +12,7 @@ func _ready():
 
 func reset():
 	follow_character()
-	set_rot(0)
+	run()
 
 func follow_character():
 	var character = get_node(character_path)

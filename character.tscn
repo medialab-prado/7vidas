@@ -154,4 +154,13 @@ randomness/spread = 0.1
 randomness/linear_velocity = 0.1
 randomness/spin_velocity = 0.1
 
+[node name="reload map timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="reload map timer" to="." method="_on_reload_map_timeout"]
+
 

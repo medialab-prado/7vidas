@@ -17,12 +17,10 @@ func _ready():
 	hud.reset(map_name, time_limit, true)
 
 func run():
-	camera.run()
 	character.run()
 	hud.start_map()
 
 func finish(completed):
-	camera.freeze()
 	character.freeze()
 	hud.end_map(completed)
 

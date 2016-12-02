@@ -1,8 +1,10 @@
 extends RigidBody2D
 
 var object_moves = true
-var animation
+var game
 var hud
+var animation
+var reload_map_timer
 var do_jump = false
 var jump_force
 var do_explode = false
@@ -21,8 +23,10 @@ func _enter_tree():
 	reset()
 
 func _ready():
-	animation = get_node("sprite/animation")
+	game = get_node("/root/game")
 	hud = get_node("/root/game/hud")
+	animation = get_node("sprite/animation")
+	reload_map_timer = get_node("reload map timer")
 	frag = load("res://frag.tscn")
 
 func _integrate_forces(state):
@@ -76,16 +80,25 @@ func jump(force = 500):
 
 func explode():
 	do_explode = true
+	hud.end_map(false)
 	hud.show_hint("Fatality")
+	reload_map_timer.start()
 
 func burn():
 	freeze()
 	set_rot(0)
 	get_node("burn").set_emitting(true)
+	hud.end_map(false)
 	hud.show_hint("Ouch!")
+	reload_map_timer.start()
 
 func drown():
 	freeze()
 	set_rot(0)
 	get_node("drown").set_emitting(true)
+	hud.end_map(false)
 	hud.show_hint("Glub glub glub")
+	reload_map_timer.start()
+
+func _on_reload_map_timeout():
+	game.reload_map()

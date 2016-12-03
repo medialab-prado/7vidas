@@ -15,6 +15,7 @@ var port = 29095
 var packet_peer = PacketPeerUDP.new()
 
 var rotation = 0
+var initial_scene
 var maps = []
 var current_map = 0
 var net_input_timer
@@ -43,6 +44,7 @@ func _ready():
 		get_tree().set_screen_stretch(1, 1, Vector2(facade_size) * 4)
 		map_container = get_node(".")
 
+	initial_scene = load("res://init.tscn")
 	maps.append(load("res://map01.tscn"))
 	#maps.append(load("res://map02.tscn"))
 
@@ -52,8 +54,7 @@ func _ready():
 			print("Network: Error listening on port ", port)
 
 	set_process(true)
-	map_container.add_child(maps[current_map].instance())
-	start_map_timer.start()
+	map_container.add_child(initial_scene.instance())
 
 func _process(delta):
 	if control_method == "network":
@@ -97,6 +98,11 @@ func process_packet(packet):
 
 func get_control_method():
 	return control_method
+
+func start_game():
+	map_container.get_node("initial scene").queue_free()
+	map_container.add_child(maps[current_map].instance())
+	start_map_timer.start()
 
 func reload_map():
 	# TODO: Check remaining lives

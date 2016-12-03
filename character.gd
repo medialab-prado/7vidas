@@ -19,15 +19,13 @@ func reset():
 	do_explode = false
 	show()
 
-func _enter_tree():
-	reset()
-
 func _ready():
 	game = get_node("/root/game")
 	hud = get_node("../hud")
 	animation = get_node("sprite/animation")
 	reload_map_timer = get_node("reload map timer")
 	frag = load("res://frag.tscn")
+	reset()
 
 func _integrate_forces(state):
 	var lv = get_linear_velocity()

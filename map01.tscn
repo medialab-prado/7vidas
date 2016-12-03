@@ -67,6 +67,7 @@ __meta__ = { "_edit_lock_":true }
 [node name="camera" type="Camera2D" parent="."]
 
 visibility/visible = false
+transform/pos = Vector2( 461.232, -570.577 )
 anchor_mode = 1
 rotating = true
 current = true

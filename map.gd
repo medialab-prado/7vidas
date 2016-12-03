@@ -5,16 +5,16 @@ export var time_limit = 45
 
 var character
 var camera
-var camera_path = "/root/game/viewport/camera"
 var hud
-var hud_path = "/root/game/hud"
 
 func _ready():
+	hud = get_node("hud")
 	character = get_node("character")
-	camera = get_node(camera_path)
+	camera = get_node("camera")
 	camera.reset()
-	hud = get_node(hud_path)
 	hud.reset(map_name, time_limit, true)
+	if not get_node("/root/game"):
+		run()
 
 func run():
 	character.run()
@@ -28,9 +28,6 @@ func reset():
 	character.reset()
 	camera.reset()
 	hud.reset(map_name, time_limit, false)
-
-func getCurrentMapName():
-	return map_name
 
 func _on_body_enter_fatality(body):
 	if body.get_name() != "character":

@@ -48,10 +48,25 @@ func _process(delta):
 			if time_left == 9 or time_left == 7:
 				show_hint("Hurry Up!")
 
+func pixel_perfect(label):
+	# This ugly code makes the label text start on exact pixel boundaries on
+	# medialab facade. As resolution is quite low, it makes a big difference.
+	if not game or not game.medialab_facade:
+		return
+	label.set_align(0)
+	var font = label.get_font("font")
+	var size = font.get_string_size(label.get_text())
+	var offset = ((768 - int(size.x)) / 2)
+	offset -= offset % 4
+	var pos = label.get_pos()
+	pos.x = offset
+	label.set_pos(pos)
+
 func reset(map_name, seconds, first_try = true):
 	stop_hints()
 	current_map_name = map_name
 	map_info1.set_text(map_name)
+	pixel_perfect(map_info1)
 	map_info1.show()
 	if first_try:
 		key_taken = false
@@ -60,6 +75,7 @@ func reset(map_name, seconds, first_try = true):
 		map_info2.set_text("Ready!")
 	else:
 		map_info2.set_text("Try again")
+	pixel_perfect(map_info2)
 	map_info2.show()
 	time_left = int(seconds)
 	time_label.set_text("%d:%02d" % [time_left/60, time_left%60])
@@ -80,6 +96,7 @@ func show_hint(message):
 		next_hint = message
 		return
 	map_info2.set_text(message)
+	pixel_perfect(map_info2)
 	map_info2.show()
 	hint_active = true
 	hint_timer.start()
@@ -119,6 +136,7 @@ func end_map(completed):
 	map_timer.stop()
 	if completed:
 		map_info1.set_text("Well done")
+		pixel_perfect(map_info1)
 		map_info1.show()
 		map_info2.hide()
 
@@ -140,6 +158,7 @@ func idle_countdown_stop():
 func _on_countdown_finished():
 	stop_hints()
 	map_info2.set_text("Move or die")
+	pixel_perfect(map_info2)
 	map_info2.show()
 	game.reload_map()
 
@@ -149,6 +168,7 @@ func map_timeout():
 	time_left = 0
 	time_label.set_text("0:00")
 	map_info1.set_text("Time's up")
+	pixel_perfect(map_info1)
 	map_info1.show()
 	game.reload_map()
 

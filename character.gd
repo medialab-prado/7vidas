@@ -24,7 +24,7 @@ func _enter_tree():
 
 func _ready():
 	game = get_node("/root/game")
-	hud = get_node("/root/game/hud")
+	hud = get_node("../hud")
 	animation = get_node("sprite/animation")
 	reload_map_timer = get_node("reload map timer")
 	frag = load("res://frag.tscn")
@@ -101,4 +101,5 @@ func drown():
 	reload_map_timer.start()
 
 func _on_reload_map_timeout():
-	game.reload_map()
+	if game:
+		game.reload_map()

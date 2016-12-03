@@ -1,13 +1,15 @@
-extends Container
+extends Node
 
 # The variable "medialab_facade" enables a visualization mode for the digital
 # facade of the Medialab-Prado building in Madrid. It is very specific and
 # should be kept disabled in any other screen.
 # http://medialab-prado.es/article/fachada_digital_informacion_tecnica
-
 export var medialab_facade = false
 var facade_offset = Vector2(40, 40)
 var facade_size = Vector2(192, 157)
+
+# Supported control methods are keyboard and network.
+export var control_method = "keyboard"
 
 var port = 29095
 var packet_peer = PacketPeerUDP.new()
@@ -15,90 +17,54 @@ var packet_peer = PacketPeerUDP.new()
 var rotation = 0
 var maps = []
 var current_map = 0
-var keyboard = false
 var net_input_timer
 var dead_zone = 0.2
-var gameview_path = "/root/game/viewport"
-var map_path = "/root/game/viewport/map"
-var camera
-var hud
+var map_path = "map"
+var camera_path = "map/camera"
+var hud_path = "map/hud"
+var map_container
 var next_map_timer
 var start_map_timer
 
 func _ready():
-	hud = get_node("hud")
 	next_map_timer = get_node("next map timer")
 	start_map_timer = get_node("start map timer")
 
 	if medialab_facade:
 		OS.set_window_fullscreen(true)
-		set_pos(facade_offset)
-		set_size(facade_size)
-		resize_for_facade(hud)
+		var container = get_node("container")
+		container.set_pos(facade_offset)
+		container.set_size(facade_size)
+		camera_path = "container/viewport/map/camera"
+		hud_path = "container/viewport/map/hud"
+		map_path = "container/viewport/map"
+		map_container = get_node("container/viewport")
 	else:
-		set_size(OS.get_window_size())
-		get_node("/root").connect("size_changed", self, "new_window_size")
+		get_tree().set_screen_stretch(1, 1, Vector2(facade_size) * 4)
+		map_container = get_node(".")
 
 	maps.append(load("res://map01.tscn"))
-	#maps.append(load("res://map02.scn"))
+	#maps.append(load("res://map02.tscn"))
 
-	net_input_timer = get_node("network input timer")
-	if packet_peer.listen(port) != OK:
-		print("Network: Error listening on port ", port)
+	if control_method == "network":
+		net_input_timer = get_node("network input timer")
+		if packet_peer.listen(port) != OK:
+			print("Network: Error listening on port ", port)
 
-	camera = get_node("viewport/camera")
 	set_process(true)
+	map_container.add_child(maps[current_map].instance())
 	start_map_timer.start()
 
-func resize_for_facade(layer):
-	if medialab_facade:
-		layer.set_scale(Vector2(0.25, 0.25))
-		layer.set_offset(facade_offset)
-
-func new_window_size():
-	set_size(get_node("/root").get_rect().size)
-	var scaleX = get_node("/root").get_rect().size.x / 768
-	var scaleY = get_node("/root").get_rect().size.y / 628
-	hud.set_scale(Vector2(scaleX, scaleY))
-
 func _process(delta):
-	if packet_peer.is_listening():
-		while packet_peer.get_available_packet_count() > 0:
-			process_packet(packet_peer.get_packet())
-
-	if Input.is_action_pressed("rotate_cw"):
-		keyboard = true
-		rotation = 1.5708
-	elif Input.is_action_pressed("rotate_ccw"):
-		keyboard = true
-		rotation = -1.5708
-	elif keyboard:
-		rotation = 0
-
-	if camera.is_frozen():
-		return
-	var camera_rotation = camera.get_rot()
-	if camera_rotation > rotation:
-		var rotation_speed = (camera_rotation - rotation) * 2
-		if rotation_speed < 0.5:
-			rotation_speed = 0.5
-		camera_rotation -= rotation_speed * delta
-		if camera_rotation < rotation:
-			camera_rotation = rotation
-	elif camera_rotation < rotation:
-		var rotation_speed = (rotation - camera_rotation) * 2
-		if rotation_speed < 0.5:
-			rotation_speed = 0.5
-		camera_rotation += rotation_speed * delta
-		if camera_rotation > rotation:
-			camera_rotation = rotation
-	camera_rotation = clamp(camera_rotation, -1.5708, 1.5708)
-	camera.set_rot(camera_rotation)
+	if control_method == "network":
+		if packet_peer.is_listening():
+			while packet_peer.get_available_packet_count() > 0:
+				process_packet(packet_peer.get_packet())
 
 func process_packet(packet):
 	# This is not the OSC protocol but an ASCII packet resembling the OSC format,
 	# which is much easier to handle within Godot.
-	
+
 	# print("DEBUG: packet received: ", packet.get_string_from_ascii())
 	var fields = packet.get_string_from_ascii().split(" ", 0)
 	if fields.size() != 6:
@@ -127,6 +93,11 @@ func process_packet(packet):
 	else:
 		rotation = 0
 
+	get_node(camera_path).set_wanted_rotation(rotation)
+
+func get_control_method():
+	return control_method
+
 func reload_map():
 	# TODO: Check remaining lives
 	get_node(map_path).finish(false)
@@ -140,9 +111,9 @@ func next_map():
 
 func _on_next_map_timeout():
 	var old_map = get_node(map_path)
-	get_node(gameview_path).remove_child(old_map)
+	map_container.remove_child(old_map)
 	old_map.free()
-	get_node(gameview_path).add_child(maps[current_map].instance())
+	map_container.add_child(maps[current_map].instance())
 	start_map_timer.start()
 
 func _on_start_map_timeout():

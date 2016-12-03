@@ -7,7 +7,7 @@ var hud
 func _ready():
 	game = get_node("/root/game")
 	animation = get_node("door closed/animation")
-	hud = get_node("/root/game/hud")
+	hud = get_node("../hud")
 
 func _on_exit_door_body_enter(body):
 	if body.get_name() != "character":

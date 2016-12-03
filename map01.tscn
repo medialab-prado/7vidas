@@ -1,40 +1,37 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://map.gd" type="Script" id=1]
-[ext_resource path="res://exit_door.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ground_grass_tileset.tres" type="TileSet" id=3]
-[ext_resource path="res://scenery_tiles.tres" type="TileSet" id=4]
-[ext_resource path="res://key.tscn" type="PackedScene" id=5]
-[ext_resource path="res://gem.tscn" type="PackedScene" id=6]
-[ext_resource path="res://character.tscn" type="PackedScene" id=7]
-[ext_resource path="res://jump_pad.tscn" type="PackedScene" id=8]
+[ext_resource path="res://hud.tscn" type="PackedScene" id=2]
+[ext_resource path="res://camera.gd" type="Script" id=3]
+[ext_resource path="res://exit_door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ground_grass_tileset.tres" type="TileSet" id=5]
+[ext_resource path="res://scenery_tiles.tres" type="TileSet" id=6]
+[ext_resource path="res://key.tscn" type="PackedScene" id=7]
+[ext_resource path="res://gem.tscn" type="PackedScene" id=8]
+[ext_resource path="res://character.tscn" type="PackedScene" id=9]
+[ext_resource path="res://jump_pad.tscn" type="PackedScene" id=10]
 
-[sub_resource type="ConvexPolygonShape2D" id=10]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -975.292, 3857.14, -960.113, -1479.63, 1699.35, -1438.44, 1704.7, 1176.76, 1313.83, 3840.31 )
-
-[sub_resource type="ConvexPolygonShape2D" id=11]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 2449.48, 1177.95, 2471.9, 4109.69, 1595.79, 4117.24, 1313.83, 3840.31, 1704.7, 1176.76 )
+points = Vector2Array( -960.113, -1479.63, 2456.2, -1474.78, 2498.25, 4151.16, -975.292, 3857.14 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 133.782, 16.177 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 198.478, 13.9033 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
 extents = Vector2( 69.2383, 15.8838 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
 extents = Vector2( 230.012, 41.8894 )
@@ -43,12 +40,9 @@ extents = Vector2( 230.012, 41.8894 )
 
 transform/pos = Vector2( 3, 0 )
 input/pickable = false
-shapes/0/shape = SubResource( 10 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 11 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/1/trigger = false
 space_override = 3
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -63,12 +57,35 @@ time_limit = 60
 
 visibility/visible = false
 build_mode = 0
-polygon = Vector2Array( -960.113, -1479.63, 1699.35, -1438.44, 1704.7, 1176.76, 2449.48, 1177.95, 2471.9, 4109.69, 1595.79, 4117.24, 1313.83, 3840.31, -975.292, 3857.14 )
-shape_range = Vector2( 0, 1 )
+polygon = Vector2Array( -960.113, -1479.63, 2456.2, -1474.78, 2498.25, 4151.16, -975.292, 3857.14 )
+shape_range = Vector2( 0, 0 )
 trigger = false
 __meta__ = { "_edit_lock_":true }
 
-[node name="exit door" parent="." instance=ExtResource( 2 )]
+[node name="hud" parent="." instance=ExtResource( 2 )]
+
+[node name="camera" type="Camera2D" parent="."]
+
+visibility/visible = false
+anchor_mode = 1
+rotating = true
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+script/script = ExtResource( 3 )
+
+[node name="exit door" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 855.538, 3242.01 )
 
@@ -76,7 +93,7 @@ transform/pos = Vector2( 855.538, 3242.01 )
 
 transform/pos = Vector2( -192, 0 )
 mode = 0
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 5 )
 cell/size = Vector2( 64, 64 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -96,7 +113,7 @@ __meta__ = { "_edit_lock_":true }
 
 transform/scale = Vector2( 0.5, 0.5 )
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 6 )
 cell/size = Vector2( 32, 32 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -114,90 +131,90 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="keys" type="Node" parent="."]
 
-[node name="key1" parent="keys" instance=ExtResource( 5 )]
+[node name="key1" parent="keys" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 115, 456 )
 
-[node name="key2" parent="keys" instance=ExtResource( 5 )]
+[node name="key2" parent="keys" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( -351.635, 1254 )
 
-[node name="key3" parent="keys" instance=ExtResource( 5 )]
+[node name="key3" parent="keys" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 62.497, 3288.48 )
 
 [node name="blue gems" type="Node" parent="."]
 
-[node name="blue gem1" parent="blue gems" instance=ExtResource( 6 )]
+[node name="blue gem1" parent="blue gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 930.772, 2900.58 )
 
-[node name="blue gem2" parent="blue gems" instance=ExtResource( 6 )]
+[node name="blue gem2" parent="blue gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 961.703, 2553.16 )
 
-[node name="blue gem3" parent="blue gems" instance=ExtResource( 6 )]
+[node name="blue gem3" parent="blue gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -408.498, 2289.66 )
 
-[node name="blue gem4" parent="blue gems" instance=ExtResource( 6 )]
+[node name="blue gem4" parent="blue gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -312.971, 70.5713 )
 
-[node name="blue gem5" parent="blue gems" instance=ExtResource( 6 )]
+[node name="blue gem5" parent="blue gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1192.05, 1669.62 )
 
 [node name="green gems" type="Node" parent="."]
 
-[node name="green gem1" parent="green gems" instance=ExtResource( 6 )]
+[node name="green gem1" parent="green gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 402.946, 2380.92 )
 frame = 1
 
-[node name="green gem2" parent="green gems" instance=ExtResource( 6 )]
+[node name="green gem2" parent="green gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -426.715, 2985.14 )
 frame = 1
 
-[node name="green gem3" parent="green gems" instance=ExtResource( 6 )]
+[node name="green gem3" parent="green gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 969.232, 1293.92 )
 frame = 1
 
-[node name="green gem4" parent="green gems" instance=ExtResource( 6 )]
+[node name="green gem4" parent="green gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -64.8549, 1080.48 )
 frame = 1
 
-[node name="green gem5" parent="green gems" instance=ExtResource( 6 )]
+[node name="green gem5" parent="green gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1064.03, 266.117 )
 frame = 1
 
-[node name="green gem6" parent="green gems" instance=ExtResource( 6 )]
+[node name="green gem6" parent="green gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -90.5905, 529.901 )
 frame = 1
 
-[node name="green gem7" parent="green gems" instance=ExtResource( 6 )]
+[node name="green gem7" parent="green gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1493.97, 2969.96 )
 frame = 1
 
 [node name="red gems" type="Node" parent="."]
 
-[node name="red gem1" parent="red gems" instance=ExtResource( 6 )]
+[node name="red gem1" parent="red gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -503.447, 1487.34 )
 frame = 2
 
-[node name="red gem2" parent="red gems" instance=ExtResource( 6 )]
+[node name="red gem2" parent="red gems" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1540.19, 1758.65 )
 frame = 2
 
-[node name="character" parent="." instance=ExtResource( 7 )]
+[node name="character" parent="." instance=ExtResource( 9 )]
 
 visibility/visible = false
 transform/pos = Vector2( -2.27209, 0 )
@@ -206,7 +223,7 @@ transform/pos = Vector2( -2.27209, 0 )
 
 transform/scale = Vector2( 0.5, 0.5 )
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 6 )
 cell/size = Vector2( 128, 128 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -226,7 +243,7 @@ __meta__ = { "_edit_lock_":true }
 
 editor/display_folded = true
 input/pickable = true
-shapes/0/shape = SubResource( 4 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, -63, 2931 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -238,7 +255,7 @@ __meta__ = { "_edit_group_":true, "_edit_lock_":true }
 [node name="CollisionShape2D" type="CollisionShape2D" parent="water"]
 
 transform/pos = Vector2( -63, 2931 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
@@ -246,10 +263,10 @@ _update_shape_index = 0
 
 editor/display_folded = true
 input/pickable = true
-shapes/0/shape = SubResource( 8 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 1855.86, 2495.86 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 12 )
+shapes/1/shape = SubResource( 4 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, -64.5048, 3522.21 )
 shapes/1/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -262,7 +279,7 @@ __meta__ = { "_edit_group_":true, "_edit_lock_":true }
 
 visibility/visible = false
 transform/pos = Vector2( 1855.86, 2495.86 )
-shape = SubResource( 8 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
@@ -270,8 +287,7 @@ _update_shape_index = 0
 
 visibility/visible = false
 transform/pos = Vector2( -64.5048, 3522.21 )
-transform/scale = Vector2( 1, 1 )
-shape = SubResource( 12 )
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 1
 
@@ -279,7 +295,7 @@ _update_shape_index = 1
 
 editor/display_folded = true
 input/pickable = true
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 0.999998, 2015.49, 3736.77 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -293,21 +309,21 @@ __meta__ = { "_edit_group_":true, "_edit_lock_":true }
 visibility/visible = false
 transform/pos = Vector2( 2015.49, 3736.77 )
 transform/scale = Vector2( 1, 0.999998 )
-shape = SubResource( 9 )
+shape = SubResource( 5 )
 trigger = false
 _update_shape_index = 0
 
-[node name="jump pad1" parent="." instance=ExtResource( 8 )]
+[node name="jump pad1" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 1307.44, 3041.38 )
 force = 650
 
-[node name="jump pad2" parent="." instance=ExtResource( 8 )]
+[node name="jump pad2" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 780.979, 2721.69 )
 force = 400
 
-[node name="jump pad3" parent="." instance=ExtResource( 8 )]
+[node name="jump pad3" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 1540.07, 2400.64 )
 force = 800

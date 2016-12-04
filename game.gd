@@ -46,7 +46,7 @@ func _ready():
 
 	initial_scene = load("res://init.tscn")
 	maps.append(load("res://map01.tscn"))
-	#maps.append(load("res://map02.tscn"))
+	maps.append(load("res://map02.tscn"))
 
 	if control_method == "network":
 		net_input_timer = get_node("network input timer")

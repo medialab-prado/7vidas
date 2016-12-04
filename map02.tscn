@@ -1,0 +1,310 @@
+[gd_scene load_steps=17 format=1]
+
+[ext_resource path="res://map.gd" type="Script" id=1]
+[ext_resource path="res://hud.tscn" type="PackedScene" id=2]
+[ext_resource path="res://camera.gd" type="Script" id=3]
+[ext_resource path="res://exit_door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://temp_ground2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://temp_scenery2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://key.tscn" type="PackedScene" id=7]
+[ext_resource path="res://gem.tscn" type="PackedScene" id=8]
+[ext_resource path="res://character.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenery_tiles.tres" type="TileSet" id=10]
+[ext_resource path="res://jump_pad.tscn" type="PackedScene" id=11]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -960.113, -1479.63, 2456.2, -1474.78, 2498.25, 4151.16, -975.292, 3857.14 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 133.782, 16.177 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 198.478, 13.9033 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 69.2383, 15.8838 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 230.012, 41.8894 )
+
+[node name="map" type="Area2D"]
+
+transform/pos = Vector2( 3, 0 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+space_override = 3
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+__meta__ = { "_edit_lock_":true }
+map_name = "Polar"
+time_limit = 60
+default_actor = "panda"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+visibility/visible = false
+build_mode = 0
+polygon = Vector2Array( -960.113, -1479.63, 2456.2, -1474.78, 2498.25, 4151.16, -975.292, 3857.14 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+__meta__ = { "_edit_lock_":true }
+
+[node name="hud" parent="." instance=ExtResource( 2 )]
+
+[node name="camera" type="Camera2D" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 461.232, -570.577 )
+anchor_mode = 1
+rotating = true
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+script/script = ExtResource( 3 )
+
+[node name="exit door" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 855.538, 3242.01 )
+
+[node name="ground" parent="." instance=ExtResource( 5 )]
+
+[node name="scenery" parent="." instance=ExtResource( 6 )]
+
+tile_data = IntArray( -2097132, 11, -2097128, 11, -1834988, 11, -1834984, 11, -1638418, 21, -1638413, 21, -1638408, 21, -1245139, 21, -1245134, 21, -1245129, 21, 262172, 3, 1048612, 9, 3670049, 4, 3670058, 19, 4194346, 3, 6619118, 536870921, 6553648, 1073741827, 7077989, 9, 7471126, 536870931, 8126500, 1073741834, 8454139, 9, 8454143, 536870922, 8388608, 536870922, 8388611, 536870922, 8388613, 536870922, 8388616, 536870922, 8454152, 536870929, 8585224, 536870929, 8716296, 536870929, 8847368, 536870929, 8978440, 536870929, 9109512, 536870929, 9240584, 536870929, 9371656, 536870929, 9502728, 536870929, 9633800, 536870929, 9764872, 536870929, 9895944, 536870929, 10027016, 536870929, 10158088, 536870929, 10289160, 536870929, 10420232, 536870929, 10485825, 10, 10551304, 536870929, 10682376, 536870929, 10747912, 536870929, 10878984, 536870929, 11010056, 536870929, 11403252, 536870929, 11534324, 536870929, 11862004, 536870929, 13369348, 536870921, 13369353, 536870921, 13369358, 536870921, 13369383, 1, 13369387, 8, 13369408, 9, 13369412, 9, 13369416, 9, 13369421, 10 )
+
+[node name="keys" type="Node" parent="."]
+
+[node name="key1" parent="keys" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 115, 456 )
+
+[node name="key2" parent="keys" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( -351.635, 1254 )
+
+[node name="key3" parent="keys" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( -150.773, 3103.03 )
+
+[node name="blue gems" type="Node" parent="."]
+
+[node name="blue gem1" parent="blue gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 857.424, 3118.98 )
+transform/rot = 179.916
+
+[node name="blue gem2" parent="blue gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1344.04, 2022.37 )
+
+[node name="blue gem3" parent="blue gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( -408.498, 2289.66 )
+
+[node name="blue gem4" parent="blue gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( -312.971, 70.5713 )
+
+[node name="blue gem5" parent="blue gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1192.05, 1669.62 )
+
+[node name="green gems" type="Node" parent="."]
+
+[node name="green gem1" parent="green gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 292.217, 2405.53 )
+frame = 1
+
+[node name="green gem2" parent="green gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( -426.715, 2985.14 )
+frame = 1
+
+[node name="green gem3" parent="green gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 969.232, 1293.92 )
+frame = 1
+
+[node name="green gem4" parent="green gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( -64.8549, 1080.48 )
+frame = 1
+
+[node name="green gem5" parent="green gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1859.11, 186.037 )
+frame = 1
+
+[node name="green gem6" parent="green gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( -90.5905, 529.901 )
+frame = 1
+
+[node name="green gem7" parent="green gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 62.595, 2071.4 )
+frame = 1
+
+[node name="red gems" type="Node" parent="."]
+
+[node name="red gem1" parent="red gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( -503.447, 1487.34 )
+frame = 2
+
+[node name="red gem2" parent="red gems" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1540.19, 1758.65 )
+frame = 2
+
+[node name="character" parent="." instance=ExtResource( 9 )]
+
+visibility/visible = false
+transform/pos = Vector2( -2.27209, 0 )
+
+[node name="front scenery" type="TileMap" parent="."]
+
+transform/scale = Vector2( 0.5, 0.5 )
+mode = 0
+tile_set = ExtResource( 10 )
+cell/size = Vector2( 128, 128 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 2490394, 22, 2490395, 22, 2490396, 22, 2490397, 22, 2490398, 22, 2490399, 22, 2949117, 13, 2949118, 13, 2949119, 13, 2883584, 13, 3014653, 536870923, 3014654, 536870923, 3014655, 536870923, 2949120, 536870923, 3342354, 22, 3342355, 22, 3604477, 22, 3604478, 22 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="water" type="Area2D" parent="."]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -63, 2931 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+__meta__ = { "_edit_group_":true, "_edit_lock_":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="water"]
+
+transform/pos = Vector2( -63, 2931 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="spikes" type="Area2D" parent="."]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 1855.86, 2495.86 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 4 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, -64.5048, 3522.21 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+__meta__ = { "_edit_group_":true, "_edit_lock_":true }
+
+[node name="CollisionShape2D 1" type="CollisionShape2D" parent="spikes"]
+
+visibility/visible = false
+transform/pos = Vector2( 1855.86, 2495.86 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="CollisionShape2D 2" type="CollisionShape2D" parent="spikes"]
+
+visibility/visible = false
+transform/pos = Vector2( -64.5048, 3522.21 )
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 1
+
+[node name="lava" type="Area2D" parent="."]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.999998, 2015.49, 3736.77 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+__meta__ = { "_edit_group_":true, "_edit_lock_":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lava"]
+
+visibility/visible = false
+transform/pos = Vector2( 2015.49, 3736.77 )
+transform/scale = Vector2( 1, 0.999998 )
+shape = SubResource( 5 )
+trigger = false
+_update_shape_index = 0
+
+[node name="jump pad1" parent="." instance=ExtResource( 11 )]
+
+transform/pos = Vector2( 607.609, 2145.79 )
+transform/rot = -90.6883
+force = 650
+
+[node name="jump pad2" parent="." instance=ExtResource( 11 )]
+
+transform/pos = Vector2( -430.19, 3301.56 )
+transform/rot = -45.7956
+force = 400
+
+[node name="jump pad3" parent="." instance=ExtResource( 11 )]
+
+transform/pos = Vector2( 390.526, -928.932 )
+transform/rot = 179.004
+force = 800
+
+[connection signal="body_enter" from="water" to="." method="_on_body_enter_water"]
+
+[connection signal="body_enter" from="spikes" to="." method="_on_body_enter_fatality"]
+
+[connection signal="body_enter" from="lava" to="." method="_on_body_enter_lava"]
+
+

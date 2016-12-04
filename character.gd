@@ -9,6 +9,7 @@ var do_jump = false
 var jump_force
 var do_explode = false
 var frag
+var actor = "rabbit"
 
 func reset():
 	set_mode(MODE_STATIC)
@@ -18,6 +19,11 @@ func reset():
 	do_jump = false
 	do_explode = false
 	show()
+
+func change_actor(new_actor):
+	actor = new_actor
+	animation.set_current_animation(actor)
+	animation.seek(0, true)
 
 func _ready():
 	game = get_node("/root/game")
@@ -69,7 +75,7 @@ func is_frozen():
 func run():
 	set_mode(MODE_RIGID)
 	set_sleeping(false)
-	animation.play("rabbit")
+	animation.play(actor)
 
 func jump(force = 500):
 	set_pos(get_pos() + Vector2(0, -20))

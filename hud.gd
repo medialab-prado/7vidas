@@ -155,7 +155,7 @@ func idle_countdown_stop():
 
 func _on_countdown_finished():
 	stop_hints()
-	map_info2.set_text("Move or die")
+	map_info2.set_text("Keep moving")
 	pixel_perfect(map_info2)
 	map_info2.show()
 	game.reload_map()

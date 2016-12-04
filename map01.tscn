@@ -52,6 +52,7 @@ script/script = ExtResource( 1 )
 __meta__ = { "_edit_lock_":true }
 map_name = "Scene 1"
 time_limit = 60
+default_actor = "rabbit"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 

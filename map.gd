@@ -2,6 +2,7 @@ extends Area2D
 
 export var map_name = "Scene 1"
 export var time_limit = 45
+export var default_actor = "rabbit"
 
 var character
 var camera
@@ -13,6 +14,7 @@ func _ready():
 	camera = get_node("camera")
 	camera.reset()
 	hud.reset(map_name, time_limit, true)
+	character.change_actor(default_actor)
 	if not get_node("/root/game"):
 		run()
 

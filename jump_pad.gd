@@ -11,7 +11,7 @@ func _ready():
 func _on_body_enter(body):
 	if jumping or body.get_name() != "character":
 		return
-	body.jump(force)
+	body.jump(force, get_rot())
 	jumping = true
 	set_frame(1)
 	spring_timer.start()

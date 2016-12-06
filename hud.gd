@@ -173,7 +173,5 @@ func map_timeout():
 	game.reload_map()
 
 func _on_map_timeout():
-	if get_node("/root/game/viewport/map").getCurrentMapName() == "Escena Inicial":
-		game.next_map()
 	if not door_is_opening:
 		map_timeout()

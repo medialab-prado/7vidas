@@ -7,6 +7,7 @@ var animation
 var reload_map_timer
 var do_jump = false
 var jump_force
+var jump_angle
 var do_explode = false
 var frag
 var actor = "rabbit"
@@ -52,8 +53,14 @@ func _integrate_forces(state):
 		return
 
 	if do_jump:
-		set_linear_velocity(Vector2(lv.x, 0))
-		apply_impulse(Vector2(0,0), Vector2(0, -jump_force))
+		var impulse = Vector2(0,1).rotated(jump_angle)
+		if abs(impulse.x) > abs(impulse.y) + 0.4:
+			set_linear_velocity(Vector2(0, lv.y))
+		elif abs(impulse.y) > abs(impulse.x) + 0.4:
+			set_linear_velocity(Vector2(lv.x, 0))
+		else:
+			set_linear_velocity(Vector2(0,0))
+		apply_impulse(Vector2(0,0), -jump_force * impulse)
 		do_jump = false
 		return
 
@@ -78,9 +85,10 @@ func run():
 	set_sleeping(false)
 	animation.play(actor)
 
-func jump(force = 500):
-	set_pos(get_pos() + Vector2(0, -20))
+func jump(force = 500, angle = 0):
+	set_pos(get_pos() + Vector2(0, -20).rotated(angle))
 	jump_force = force
+	jump_angle = angle
 	do_jump = true
 
 func explode():

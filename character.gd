@@ -10,6 +10,7 @@ var jump_force
 var do_explode = false
 var frag
 var actor = "rabbit"
+var actor_names = ["rabbit", "snake", "panda", "giraffe", "hippo", "parrot", "pig"]
 
 func reset():
 	set_mode(MODE_STATIC)
@@ -42,7 +43,7 @@ func _integrate_forces(state):
 		var num_frags = 20
 		for i in range(0, num_frags):
 			var f = frag.instance()
-			f.get_node("sprites").set_frame(0)
+			f.get_node("sprites").set_frame(actor_names.find(actor))
 			f.set_pos(get_pos() + Vector2(rand_range(-32,32),rand_range(-32,32)))
 			PS2D.body_add_collision_exception(f.get_rid(), get_rid())
 			get_parent().add_child(f)

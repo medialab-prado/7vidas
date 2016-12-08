@@ -122,6 +122,10 @@ func time_bonus(seconds):
 	elif seconds == 5:
 		gems_info_anim.queue("rise 5")
 
+func update_extra_lives():
+	if not game:
+		return
+
 func start_map():
 	map_timer.set_wait_time(time_left)
 	map_timer.start()

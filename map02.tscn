@@ -24,12 +24,12 @@ extents = Vector2( 133.782, 16.177 )
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 198.478, 13.9033 )
+extents = Vector2( 54.2202, 8.56177 )
 
 [sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 69.2383, 15.8838 )
+extents = Vector2( 10, 213.008 )
 
 [sub_resource type="RectangleShape2D" id=5]
 
@@ -51,7 +51,7 @@ angular_damp = 1.0
 script/script = ExtResource( 1 )
 __meta__ = { "_edit_lock_":true }
 map_name = "Polar"
-time_limit = 60
+time_limit = 35
 default_actor = "panda"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -189,7 +189,7 @@ frame = 1
 
 [node name="green gem5" parent="green gems" instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 1707.74, 190.242 )
+transform/pos = Vector2( 496.688, -925.504 )
 frame = 1
 
 [node name="green gem6" parent="green gems" instance=ExtResource( 8 )]
@@ -206,7 +206,7 @@ frame = 1
 
 [node name="red gem1" parent="red gems" instance=ExtResource( 8 )]
 
-transform/pos = Vector2( -503.447, 1487.34 )
+transform/pos = Vector2( 1639.8, 211.371 )
 frame = 2
 
 [node name="red gem2" parent="red gems" instance=ExtResource( 8 )]
@@ -241,7 +241,7 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="water" type="Area2D" parent="."]
 
-visibility/visible = false
+editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, -63, 2931 )
@@ -261,13 +261,12 @@ _update_shape_index = 0
 
 [node name="spikes" type="Area2D" parent="."]
 
-editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 3 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 1855.86, 2495.86 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 1222.53, 3313.19 )
 shapes/0/trigger = false
 shapes/1/shape = SubResource( 4 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, -64.5048, 3522.21 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 1776.84, 1678.66 )
 shapes/1/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -277,16 +276,14 @@ __meta__ = { "_edit_group_":true, "_edit_lock_":true }
 
 [node name="CollisionShape2D 1" type="CollisionShape2D" parent="spikes"]
 
-visibility/visible = false
-transform/pos = Vector2( 1855.86, 2495.86 )
+transform/pos = Vector2( 1222.53, 3313.19 )
 shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
-[node name="CollisionShape2D 2" type="CollisionShape2D" parent="spikes"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spikes"]
 
-visibility/visible = false
-transform/pos = Vector2( -64.5048, 3522.21 )
+transform/pos = Vector2( 1776.84, 1678.66 )
 shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 1
@@ -302,7 +299,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-__meta__ = { "_edit_group_":true, "_edit_lock_":true }
+__meta__ = { "_edit_lock_":true }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lava"]
 

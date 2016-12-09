@@ -324,9 +324,10 @@ force = 400
 
 [node name="jump pad3" parent="." instance=ExtResource( 10 )]
 
-transform/pos = Vector2( 390.526, -928.932 )
-transform/rot = 179.004
-force = 800
+transform/pos = Vector2( -153.579, 536.624 )
+transform/rot = 294.321
+transform/scale = Vector2( 0.319719, 0.5 )
+force = 600
 
 [connection signal="body_enter" from="water" to="." method="_on_body_enter_water"]
 

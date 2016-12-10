@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=1]
+[gd_scene load_steps=25 format=1]
 
 [ext_resource path="res://Platformer/Tiles/bush.png" type="Texture" id=1]
 [ext_resource path="res://Platformer/Tiles/cactus.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Platformer/Tiles/brickBrown.png" type="Texture" id=21]
 [ext_resource path="res://Platformer/Tiles/brickGrey.png" type="Texture" id=22]
 [ext_resource path="res://Platformer/Tiles/spikes.png" type="Texture" id=23]
+[ext_resource path="res://Platformer/Tiles/boxItem.png" type="Texture" id=24]
 
 [node name="Node" type="Node"]
 
@@ -140,5 +141,10 @@ texture = ExtResource( 22 )
 
 transform/pos = Vector2( 640, 496 )
 texture = ExtResource( 23 )
+
+[node name="alert" type="Sprite" parent="."]
+
+transform/pos = Vector2( 784, 496 )
+texture = ExtResource( 24 )
 
 

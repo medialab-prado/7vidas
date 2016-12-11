@@ -23,6 +23,7 @@
 [ext_resource path="res://Platformer/Tiles/sign.png" type="Texture" id=21]
 [ext_resource path="res://Platformer/Tiles/signExit.png" type="Texture" id=22]
 [ext_resource path="res://Platformer/Tiles/signLeft.png" type="Texture" id=23]
+[ext_resource path="res://Platformer/Tiles/boxItem.png" type="Texture" id=24]
 
 [resource]
 
@@ -210,4 +211,11 @@
 22/navigation_offset = Vector2( 64, 64 )
 22/shape_offset = Vector2( 0, 0 )
 22/shapes = [  ]
-
+23/name = "alert"
+23/texture = ExtResource( 24 )
+23/tex_offset = Vector2( 0, 0 )
+23/region = Rect2( 0, 0, 128, 128 )
+23/occluder_offset = Vector2( 64, 64 )
+23/navigation_offset = Vector2( 64, 64 )
+23/shape_offset = Vector2( 0, 0 )
+23/shapes = [  ]

@@ -142,8 +142,8 @@ func end_map(completed):
 #		map_info1.set_text("Well done")
 		var winner_colors = get_node("winner/colors")
 		winner_colors.play("colors")
-		pixel_perfect(map_info1)
-		map_info1.show()
+		#pixel_perfect(map_info1)
+		#map_info1.show()
 		map_info2.hide()
 
 func door_opening(enabled):

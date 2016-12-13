@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=1]
+[gd_scene load_steps=29 format=1]
 
 [ext_resource path="res://hud.gd" type="Script" id=1]
 [ext_resource path="res://Platformer/HUD/key.png" type="Texture" id=2]
@@ -15,6 +15,13 @@
 [ext_resource path="res://Fonts/time20.png" type="Texture" id=13]
 [ext_resource path="res://Fonts/time5.png" type="Texture" id=14]
 [ext_resource path="res://Fonts/kenpixel64.fnt" type="BitmapFont" id=15]
+[ext_resource path="res://Platformer/Winner/Colors/winner_03.png" type="Texture" id=16]
+[ext_resource path="res://Platformer/Winner/Colors/winner_04.png" type="Texture" id=17]
+[ext_resource path="res://Platformer/Winner/Colors/winner_05.png" type="Texture" id=18]
+[ext_resource path="res://Platformer/Winner/Colors/winner_06.png" type="Texture" id=19]
+[ext_resource path="res://Platformer/Winner/Colors/winner_07.png" type="Texture" id=20]
+[ext_resource path="res://Platformer/Winner/Colors/winner_08.png" type="Texture" id=21]
+[ext_resource path="res://winner.tres" type="Animation" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -99,6 +106,10 @@ tracks/3/path = NodePath(".:frame")
 tracks/3/interp = 1
 tracks/3/imported = false
 tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 1 ] }
+
+[sub_resource type="SpriteFrames" id=6]
+
+animations = [ { "frames":[ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ], "loop":true, "name":"default", "speed":15.0 } ]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -218,6 +229,29 @@ process_mode = 1
 wait_time = 3.0
 one_shot = true
 autostart = false
+
+[node name="winner" type="AnimatedSprite" parent="."]
+
+material/use_parent = true
+transform/pos = Vector2( 120.021, -416.176 )
+transform/scale = Vector2( 3, 3 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 4
+playing = true
+centered = false
+
+[node name="colors" type="AnimationPlayer" parent="winner"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/colors = ExtResource( 22 )
+next/colors = ""
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
 [connection signal="finished" from="numbers/animation" to="." method="_on_countdown_finished"]
 

@@ -139,7 +139,9 @@ func end_map(completed):
 	idle_countdown_stop()
 	map_timer.stop()
 	if completed:
-		map_info1.set_text("Well done")
+#		map_info1.set_text("Well done")
+		var winner_colors = get_node("winner/colors")
+		winner_colors.play("colors")
 		pixel_perfect(map_info1)
 		map_info1.show()
 		map_info2.hide()

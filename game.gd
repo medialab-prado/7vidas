@@ -4,12 +4,12 @@ extends Node
 # facade of the Medialab-Prado building in Madrid. It is very specific and
 # should be kept disabled in any other screen.
 # http://medialab-prado.es/article/fachada_digital_informacion_tecnica
-export var medialab_facade = true##false
+export var medialab_facade = false
 var facade_offset = Vector2(40, 40)
 var facade_size = Vector2(192, 157)
 
 # Supported control methods are keyboard and network.
-export var control_method = "network"#"keyboard"
+export var control_method = "keyboard"
 
 var port = 29095
 var packet_peer = PacketPeerUDP.new()

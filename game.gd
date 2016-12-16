@@ -21,6 +21,8 @@ var extra_actors = ["giraffe", "hippo", "parrot", "pig"]
 var maps = []
 var current_map = 0
 var net_input_timer
+var prev_jump_val1 = 1
+var prev_jump_val2 = 1
 var dead_zone = 0.2
 var map_path = "map"
 var camera_path = "map/camera"
@@ -71,11 +73,13 @@ func process_packet(packet):
 
 	# print("DEBUG: packet received: ", packet.get_string_from_ascii())
 	var fields = packet.get_string_from_ascii().split(" ", 0)
-	if fields.size() != 6:
+	if fields.size() < 2:
 		return
 
 	var address = fields[0]
 	if address == "/GameBlob": # Rotation
+		if fields.size() != 6:
+			return
 		var type = fields[1]
 		if type != "ffff":
 			return
@@ -98,7 +102,18 @@ func process_packet(packet):
 		get_node(camera_path).set_wanted_rotation(rotation)
 	
 	elif address == "/GameBlob2": # Jump
-		pass
+		if fields.size() != 6:
+			return
+		var type = fields[1]
+		if type != "ffff":
+			return
+
+		var jump_val1 = clamp(fields[2].to_float(), 0, 1)
+		var jump_val2 = clamp(fields[3].to_float(), 0, 1)
+		if jump_val1 > prev_jump_val1 + 0.02 or jump_val2 > prev_jump_val2 + 0.02:
+			get_node(map_path).get_node("character").jump(400, 0, false)
+		prev_jump_val1 = jump_val1
+		prev_jump_val2 = jump_val2
 
 func get_control_method():
 	return control_method

@@ -16,7 +16,7 @@ var packet_peer = PacketPeerUDP.new()
 
 var rotation = 0
 var initial_scene
-var extra_lives
+var lives
 var extra_actors = ["giraffe", "hippo", "parrot", "pig"]
 var maps = []
 var current_map = 0
@@ -103,13 +103,13 @@ func get_control_method():
 	return control_method
 
 func start_game():
-	extra_lives = []
+	lives = 5
 	map_container.get_node("initial scene").queue_free()
 	map_container.add_child(maps[current_map].instance())
 	start_map_timer.start()
 
 func reload_map():
-	# TODO: Check remaining lives
+	lives -= 1
 	get_node(map_path).finish(false)
 	next_map_timer.start()
 
@@ -120,15 +120,18 @@ func next_map():
 	next_map_timer.start()
 
 func extra_life():
-	# TODO: select random character from remaining lives
-	return "parrot"
+	lives += 1
+	return extra_actors[int(rand_range(0, extra_actors.size() - 1))]
 
 func _on_next_map_timeout():
 	var old_map = get_node(map_path)
 	map_container.remove_child(old_map)
 	old_map.free()
-	map_container.add_child(maps[current_map].instance())
-	start_map_timer.start()
+	if lives == 0: # End game
+		map_container.add_child(initial_scene.instance())
+	else:
+		map_container.add_child(maps[current_map].instance())
+		start_map_timer.start()
 
 func _on_start_map_timeout():
 	get_node(map_path).run()

@@ -5,6 +5,7 @@ var game
 var hud
 var animation
 var reload_map_timer
+var jump_timer
 var do_jump = false
 var jump_force
 var jump_angle
@@ -32,8 +33,14 @@ func _ready():
 	hud = get_node("../hud")
 	animation = get_node("sprite/animation")
 	reload_map_timer = get_node("reload map timer")
+	jump_timer = get_node("jump timer")
 	frag = load("res://frag.tscn")
 	reset()
+
+func _process(delta):
+	if not game or game.get_control_method() == "keyboard":
+		if Input.is_action_pressed("jump"):
+			jump(400, 0, false)
 
 func _integrate_forces(state):
 	var lv = get_linear_velocity()
@@ -74,6 +81,7 @@ func _integrate_forces(state):
 			hud.idle_countdown_stop()
 
 func freeze():
+	set_process(false)
 	set_mode(MODE_STATIC)
 	animation.stop()
 
@@ -81,12 +89,18 @@ func is_frozen():
 	return (get_mode() == MODE_STATIC)
 
 func run():
+	set_process(true)
 	set_mode(MODE_RIGID)
 	set_sleeping(false)
 	animation.play(actor)
 
-func jump(force = 500, angle = 0):
-	set_pos(get_pos() + Vector2(0, -20).rotated(angle))
+func jump(force = 500, angle = 0, external_force = true):
+	if external_force:
+		set_pos(get_pos() + Vector2(0, -20).rotated(angle))
+	else:
+		if jump_timer.get_time_left() != 0:
+			return
+		jump_timer.start()
 	jump_force = force
 	jump_angle = angle
 	do_jump = true

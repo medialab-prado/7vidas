@@ -74,29 +74,30 @@ func process_packet(packet):
 		return
 
 	var address = fields[0]
-	if address != "/GameBlob":
-		return
-
-	var type = fields[1]
-	if type != "ffff":
-		return
-
-	var value = clamp((fields[2].to_float() - 0.5) * 2, -1, 1)
-	if abs(value) > dead_zone:
-		var new_rotation = 0
-		if value > 0:
-			new_rotation = (value - dead_zone) * 1.97
+	if address == "/GameBlob": # Rotation
+		var type = fields[1]
+		if type != "ffff":
+			return
+	
+		var value = clamp((fields[2].to_float() - 0.5) * 2, -1, 1)
+		if abs(value) > dead_zone:
+			var new_rotation = 0
+			if value > 0:
+				new_rotation = (value - dead_zone) * 1.97
+			else:
+				new_rotation = (value + dead_zone) * 1.97
+			if net_input_timer.get_time_left() == 0:
+				rotation = new_rotation
+				net_input_timer.start()
+			else:
+				rotation = (rotation + new_rotation) / 2
 		else:
-			new_rotation = (value + dead_zone) * 1.97
-		if net_input_timer.get_time_left() == 0:
-			rotation = new_rotation
-			net_input_timer.start()
-		else:
-			rotation = (rotation + new_rotation) / 2
-	else:
-		rotation = 0
-
-	get_node(camera_path).set_wanted_rotation(rotation)
+			rotation = 0
+	
+		get_node(camera_path).set_wanted_rotation(rotation)
+	
+	elif address == "/GameBlob2": # Jump
+		pass
 
 func get_control_method():
 	return control_method

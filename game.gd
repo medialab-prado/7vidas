@@ -4,23 +4,25 @@ extends Node
 # facade of the Medialab-Prado building in Madrid. It is very specific and
 # should be kept disabled in any other screen.
 # http://medialab-prado.es/article/fachada_digital_informacion_tecnica
-export var medialab_facade = true##false
+export var medialab_facade = false
 var facade_offset = Vector2(40, 40)
 var facade_size = Vector2(192, 157)
 
 # Supported control methods are keyboard and network.
-export var control_method = "network"#"keyboard"
+export var control_method = "keyboard"
 
 var port = 29095
 var packet_peer = PacketPeerUDP.new()
 
 var rotation = 0
 var initial_scene
-var extra_lives
+var lives
 var extra_actors = ["giraffe", "hippo", "parrot", "pig"]
 var maps = []
 var current_map = 0
 var net_input_timer
+var prev_jump_val1 = 1
+var prev_jump_val2 = 1
 var dead_zone = 0.2
 var map_path = "map"
 var camera_path = "map/camera"
@@ -71,45 +73,59 @@ func process_packet(packet):
 
 	# print("DEBUG: packet received: ", packet.get_string_from_ascii())
 	var fields = packet.get_string_from_ascii().split(" ", 0)
-	if fields.size() != 6:
+	if fields.size() < 2:
 		return
 
 	var address = fields[0]
-	if address != "/GameBlob":
-		return
-
-	var type = fields[1]
-	if type != "ffff":
-		return
-
-	var value = clamp((fields[2].to_float() - 0.5) * 2, -1, 1)
-	if abs(value) > dead_zone:
-		var new_rotation = 0
-		if value > 0:
-			new_rotation = (value - dead_zone) * 1.97
+	if address == "/GameBlob": # Rotation
+		if fields.size() != 6:
+			return
+		var type = fields[1]
+		if type != "ffff":
+			return
+	
+		var value = clamp((fields[2].to_float() - 0.5) * 2, -1, 1)
+		if abs(value) > dead_zone:
+			var new_rotation = 0
+			if value > 0:
+				new_rotation = (value - dead_zone) * 1.97
+			else:
+				new_rotation = (value + dead_zone) * 1.97
+			if net_input_timer.get_time_left() == 0:
+				rotation = new_rotation
+				net_input_timer.start()
+			else:
+				rotation = (rotation + new_rotation) / 2
 		else:
-			new_rotation = (value + dead_zone) * 1.97
-		if net_input_timer.get_time_left() == 0:
-			rotation = new_rotation
-			net_input_timer.start()
-		else:
-			rotation = (rotation + new_rotation) / 2
-	else:
-		rotation = 0
+			rotation = 0
+	
+		get_node(camera_path).set_wanted_rotation(rotation)
+	
+	elif address == "/GameBlob2": # Jump
+		if fields.size() != 6:
+			return
+		var type = fields[1]
+		if type != "ffff":
+			return
 
-	get_node(camera_path).set_wanted_rotation(rotation)
+		var jump_val1 = clamp(fields[2].to_float(), 0, 1)
+		var jump_val2 = clamp(fields[3].to_float(), 0, 1)
+		if jump_val1 > prev_jump_val1 + 0.02 or jump_val2 > prev_jump_val2 + 0.02:
+			get_node(map_path).get_node("character").jump(400, 0, false)
+		prev_jump_val1 = jump_val1
+		prev_jump_val2 = jump_val2
 
 func get_control_method():
 	return control_method
 
 func start_game():
-	extra_lives = []
+	lives = 5
 	map_container.get_node("initial scene").queue_free()
 	map_container.add_child(maps[current_map].instance())
 	start_map_timer.start()
 
 func reload_map():
-	# TODO: Check remaining lives
+	lives -= 1
 	get_node(map_path).finish(false)
 	next_map_timer.start()
 
@@ -120,15 +136,18 @@ func next_map():
 	next_map_timer.start()
 
 func extra_life():
-	# TODO: select random character from remaining lives
-	return "parrot"
+	lives += 1
+	return extra_actors[int(rand_range(0, extra_actors.size() - 1))]
 
 func _on_next_map_timeout():
 	var old_map = get_node(map_path)
 	map_container.remove_child(old_map)
 	old_map.free()
-	map_container.add_child(maps[current_map].instance())
-	start_map_timer.start()
+	if lives == 0: # End game
+		map_container.add_child(initial_scene.instance())
+	else:
+		map_container.add_child(maps[current_map].instance())
+		start_map_timer.start()
 
 func _on_start_map_timeout():
 	get_node(map_path).run()

@@ -1,17 +1,21 @@
-[gd_resource type="TileSet" load_steps=25 format=1]
+[gd_resource type="TileSet" load_steps=29 format=1]
 
 [ext_resource path="res://Platformer/Ground/Grass/grassLeft.png" type="Texture" id=1]
 [ext_resource path="res://Platformer/Ground/Grass/grassMid.png" type="Texture" id=2]
 [ext_resource path="res://Platformer/Ground/Grass/grass.png" type="Texture" id=3]
 [ext_resource path="res://Platformer/Ground/Grass/grassCenter_round.png" type="Texture" id=4]
-[ext_resource path="res://Platformer/Ground/Grass/grassCorner_left.png" type="Texture" id=5]
-[ext_resource path="res://Platformer/Ground/Grass/grassCenter.png" type="Texture" id=6]
-[ext_resource path="res://Platformer/Ground/Grass/grassCliffAlt_left.png" type="Texture" id=7]
-[ext_resource path="res://Platformer/Ground/Grass/grassCliff_left.png" type="Texture" id=8]
-[ext_resource path="res://Platformer/Ground/Grass/grassHalf.png" type="Texture" id=9]
-[ext_resource path="res://Platformer/Ground/Grass/grassHalf_left.png" type="Texture" id=10]
-[ext_resource path="res://Platformer/Ground/Grass/grassHalf_mid.png" type="Texture" id=11]
-[ext_resource path="res://Platformer/Ground/Grass/grassHill_left.png" type="Texture" id=12]
+[ext_resource path="res://Platformer/Ground/Grass/grassCorner_left_hue.png" type="Texture" id=5]
+[ext_resource path="res://Platformer/Ground/Grass/grassCorner_2.png" type="Texture" id=6]
+[ext_resource path="res://Platformer/Ground/Grass/grassCorner_2_hue.png" type="Texture" id=7]
+[ext_resource path="res://Platformer/Ground/Grass/grassHill_left_hue.png" type="Texture" id=8]
+[ext_resource path="res://Platformer/Ground/Grass/grassCorner_left.png" type="Texture" id=9]
+[ext_resource path="res://Platformer/Ground/Grass/grassCenter.png" type="Texture" id=10]
+[ext_resource path="res://Platformer/Ground/Grass/grassCliffAlt_left.png" type="Texture" id=11]
+[ext_resource path="res://Platformer/Ground/Grass/grassCliff_left.png" type="Texture" id=12]
+[ext_resource path="res://Platformer/Ground/Grass/grassHalf.png" type="Texture" id=13]
+[ext_resource path="res://Platformer/Ground/Grass/grassHalf_left.png" type="Texture" id=14]
+[ext_resource path="res://Platformer/Ground/Grass/grassHalf_mid.png" type="Texture" id=15]
+[ext_resource path="res://Platformer/Ground/Grass/grassHill_left.png" type="Texture" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -41,37 +45,37 @@ points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 [sub_resource type="ConvexPolygonShape2D" id=6]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+points = Vector2Array( -32, -32, 32, 32, -32, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 32, -32, -12 )
+points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 32, 4, 28, -24, 12, -32, -8 )
+points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 32, -32, -12 )
 
 [sub_resource type="ConvexPolygonShape2D" id=9]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -28, -28, -32, 28, -32, 32, -28, 32, 0, 28, 4, -28, 4, -32, 0 )
+points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 32, 4, 28, -24, 12, -32, -8 )
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 4, -28, 4, -32, 0 )
+points = Vector2Array( -32, -28, -28, -32, 28, -32, 32, -28, 32, 0, 28, 4, -28, 4, -32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -32, 32, -32, 32, 4, -32, 4 )
+points = Vector2Array( -32, -28, -28, -32, 32, -32, 32, 4, -28, 4, -32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -32, 32, 32, -32, 32 )
+points = Vector2Array( -32, -32, 32, -32, 32, 4, -32, 4 )
 
 [resource]
 
@@ -92,7 +96,7 @@ points = Vector2Array( -32, -32, 32, 32, -32, 32 )
 1/shape_offset = Vector2( 32, 32 )
 1/shapes = [ SubResource( 2 ) ]
 2/name = "grass corner left"
-2/texture = ExtResource( 5 )
+2/texture = ExtResource( 9 )
 2/tex_offset = Vector2( 0, 0 )
 2/region = Rect2( 0, 0, 64, 64 )
 2/occluder_offset = Vector2( 32, 32 )
@@ -100,61 +104,61 @@ points = Vector2Array( -32, -32, 32, 32, -32, 32 )
 2/shape_offset = Vector2( 32, 32 )
 2/shapes = [ SubResource( 5 ) ]
 3/name = "grass center"
-3/texture = ExtResource( 6 )
+3/texture = ExtResource( 10 )
 3/tex_offset = Vector2( 0, 0 )
 3/region = Rect2( 0, 0, 64, 64 )
 3/occluder_offset = Vector2( 32, 32 )
 3/navigation_offset = Vector2( 32, 32 )
 3/shape_offset = Vector2( 32, 32 )
-3/shapes = [ SubResource( 6 ) ]
+3/shapes = [ SubResource( 7 ) ]
 4/name = "grass cliff left"
-4/texture = ExtResource( 7 )
+4/texture = ExtResource( 11 )
 4/tex_offset = Vector2( 0, 0 )
 4/region = Rect2( 0, 0, 64, 64 )
 4/occluder_offset = Vector2( 32, 32 )
 4/navigation_offset = Vector2( 32, 32 )
 4/shape_offset = Vector2( 32, 32 )
-4/shapes = [ SubResource( 7 ) ]
+4/shapes = [ SubResource( 8 ) ]
 5/name = "grass cliff left round"
-5/texture = ExtResource( 8 )
+5/texture = ExtResource( 12 )
 5/tex_offset = Vector2( 0, 0 )
 5/region = Rect2( 0, 0, 64, 64 )
 5/occluder_offset = Vector2( 32, 32 )
 5/navigation_offset = Vector2( 32, 32 )
 5/shape_offset = Vector2( 32, 32 )
-5/shapes = [ SubResource( 8 ) ]
+5/shapes = [ SubResource( 9 ) ]
 6/name = "grass half"
-6/texture = ExtResource( 9 )
+6/texture = ExtResource( 13 )
 6/tex_offset = Vector2( 0, 0 )
 6/region = Rect2( 0, 0, 64, 64 )
 6/occluder_offset = Vector2( 32, 32 )
 6/navigation_offset = Vector2( 32, 32 )
 6/shape_offset = Vector2( 32, 32 )
-6/shapes = [ SubResource( 9 ) ]
+6/shapes = [ SubResource( 10 ) ]
 7/name = "grass half left"
-7/texture = ExtResource( 10 )
+7/texture = ExtResource( 14 )
 7/tex_offset = Vector2( 0, 0 )
 7/region = Rect2( 0, 0, 64, 64 )
 7/occluder_offset = Vector2( 32, 32 )
 7/navigation_offset = Vector2( 32, 32 )
 7/shape_offset = Vector2( 32, 32 )
-7/shapes = [ SubResource( 10 ) ]
+7/shapes = [ SubResource( 11 ) ]
 8/name = "grass half mid"
-8/texture = ExtResource( 11 )
+8/texture = ExtResource( 15 )
 8/tex_offset = Vector2( 0, 0 )
 8/region = Rect2( 0, 0, 64, 64 )
 8/occluder_offset = Vector2( 32, 32 )
 8/navigation_offset = Vector2( 32, 32 )
 8/shape_offset = Vector2( 32, 32 )
-8/shapes = [ SubResource( 11 ) ]
+8/shapes = [ SubResource( 12 ) ]
 9/name = "grass hill left"
-9/texture = ExtResource( 12 )
+9/texture = ExtResource( 16 )
 9/tex_offset = Vector2( 0, 0 )
 9/region = Rect2( 0, 0, 64, 64 )
 9/occluder_offset = Vector2( 32, 32 )
 9/navigation_offset = Vector2( 32, 32 )
 9/shape_offset = Vector2( 32, 32 )
-9/shapes = [ SubResource( 12 ) ]
+9/shapes = [ SubResource( 6 ) ]
 10/name = "grass"
 10/texture = ExtResource( 3 )
 10/tex_offset = Vector2( 0, 0 )
@@ -171,4 +175,36 @@ points = Vector2Array( -32, -32, 32, 32, -32, 32 )
 11/navigation_offset = Vector2( 32, 32 )
 11/shape_offset = Vector2( 32, 32 )
 11/shapes = [ SubResource( 4 ) ]
+12/name = "grass corner left hue"
+12/texture = ExtResource( 5 )
+12/tex_offset = Vector2( 0, 0 )
+12/region = Rect2( 0, 0, 64, 64 )
+12/occluder_offset = Vector2( 32, 32 )
+12/navigation_offset = Vector2( 32, 32 )
+12/shape_offset = Vector2( 32, 32 )
+12/shapes = [ SubResource( 5 ) ]
+13/name = "grass corner 2"
+13/texture = ExtResource( 6 )
+13/tex_offset = Vector2( 0, 0 )
+13/region = Rect2( 0, 0, 64, 64 )
+13/occluder_offset = Vector2( 32, 32 )
+13/navigation_offset = Vector2( 32, 32 )
+13/shape_offset = Vector2( 32, 32 )
+13/shapes = [ SubResource( 5 ) ]
+14/name = "grass corner 2 hue"
+14/texture = ExtResource( 7 )
+14/tex_offset = Vector2( 0, 0 )
+14/region = Rect2( 0, 0, 64, 64 )
+14/occluder_offset = Vector2( 32, 32 )
+14/navigation_offset = Vector2( 32, 32 )
+14/shape_offset = Vector2( 32, 32 )
+14/shapes = [ SubResource( 5 ) ]
+15/name = "grass hill left hue"
+15/texture = ExtResource( 8 )
+15/tex_offset = Vector2( 0, 0 )
+15/region = Rect2( 0, 0, 64, 64 )
+15/occluder_offset = Vector2( 32, 32 )
+15/navigation_offset = Vector2( 32, 32 )
+15/shape_offset = Vector2( 32, 32 )
+15/shapes = [ SubResource( 6 ) ]
 

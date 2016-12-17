@@ -1,17 +1,21 @@
-[gd_scene load_steps=25 format=1]
+[gd_scene load_steps=29 format=1]
 
 [ext_resource path="res://Platformer/Ground/Grass/grassLeft.png" type="Texture" id=1]
 [ext_resource path="res://Platformer/Ground/Grass/grassMid.png" type="Texture" id=2]
 [ext_resource path="res://Platformer/Ground/Grass/grassCorner_left.png" type="Texture" id=3]
-[ext_resource path="res://Platformer/Ground/Grass/grassCenter.png" type="Texture" id=4]
-[ext_resource path="res://Platformer/Ground/Grass/grassCliffAlt_left.png" type="Texture" id=5]
-[ext_resource path="res://Platformer/Ground/Grass/grassCliff_left.png" type="Texture" id=6]
-[ext_resource path="res://Platformer/Ground/Grass/grassHalf.png" type="Texture" id=7]
-[ext_resource path="res://Platformer/Ground/Grass/grassHalf_left.png" type="Texture" id=8]
-[ext_resource path="res://Platformer/Ground/Grass/grassHalf_mid.png" type="Texture" id=9]
-[ext_resource path="res://Platformer/Ground/Grass/grassHill_left.png" type="Texture" id=10]
-[ext_resource path="res://Platformer/Ground/Grass/grass.png" type="Texture" id=11]
-[ext_resource path="res://Platformer/Ground/Grass/grassCenter_round.png" type="Texture" id=12]
+[ext_resource path="res://Platformer/Ground/Grass/grassCorner_left_hue.png" type="Texture" id=4]
+[ext_resource path="res://Platformer/Ground/Grass/grassCorner_2.png" type="Texture" id=5]
+[ext_resource path="res://Platformer/Ground/Grass/grassCorner_2_hue.png" type="Texture" id=6]
+[ext_resource path="res://Platformer/Ground/Grass/grassCenter.png" type="Texture" id=7]
+[ext_resource path="res://Platformer/Ground/Grass/grassCliffAlt_left.png" type="Texture" id=8]
+[ext_resource path="res://Platformer/Ground/Grass/grassCliff_left.png" type="Texture" id=9]
+[ext_resource path="res://Platformer/Ground/Grass/grassHalf.png" type="Texture" id=10]
+[ext_resource path="res://Platformer/Ground/Grass/grassHalf_left.png" type="Texture" id=11]
+[ext_resource path="res://Platformer/Ground/Grass/grassHalf_mid.png" type="Texture" id=12]
+[ext_resource path="res://Platformer/Ground/Grass/grassHill_left.png" type="Texture" id=13]
+[ext_resource path="res://Platformer/Ground/Grass/grassHill_left_hue.png" type="Texture" id=14]
+[ext_resource path="res://Platformer/Ground/Grass/grass.png" type="Texture" id=15]
+[ext_resource path="res://Platformer/Ground/Grass/grassCenter_round.png" type="Texture" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -157,11 +161,92 @@ polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 
+[node name="grass corner left hue" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 373.761, 206.67 )
+texture = ExtResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="grass corner left hue"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="grass corner left hue/StaticBody2D"]
+
+build_mode = 0
+polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="grass corner 2" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 210.881, 206.67 )
+texture = ExtResource( 5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="grass corner 2"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="grass corner 2/StaticBody2D"]
+
+build_mode = 0
+polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="grass corner 2 hue" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 292.875, 205.562 )
+texture = ExtResource( 6 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="grass corner 2 hue"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="grass corner 2 hue/StaticBody2D"]
+
+build_mode = 0
+polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
 [node name="grass center" type="Sprite" parent="."]
 
 editor/display_folded = true
 transform/pos = Vector2( 128, 128 )
-texture = ExtResource( 4 )
+texture = ExtResource( 7 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass center"]
 
@@ -188,7 +273,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 208, 48 )
-texture = ExtResource( 5 )
+texture = ExtResource( 8 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass cliff left"]
 
@@ -215,7 +300,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 288, 48 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass cliff left round"]
 
@@ -242,7 +327,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 208, 128 )
-texture = ExtResource( 7 )
+texture = ExtResource( 10 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass half"]
 
@@ -269,7 +354,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 288, 128 )
-texture = ExtResource( 8 )
+texture = ExtResource( 11 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass half left"]
 
@@ -296,7 +381,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 368, 128 )
-texture = ExtResource( 9 )
+texture = ExtResource( 12 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass half mid"]
 
@@ -323,7 +408,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 368, 48 )
-texture = ExtResource( 10 )
+texture = ExtResource( 13 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass hill left"]
 
@@ -346,11 +431,38 @@ polygon = Vector2Array( -32, -32, 32, 32, -32, 32 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 
+[node name="grass hill left hue" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 51.1028, 289.551 )
+texture = ExtResource( 14 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="grass hill left hue"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 10 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="grass hill left hue/StaticBody2D"]
+
+build_mode = 0
+polygon = Vector2Array( -32, -32, 32, 32, -32, 32 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
 [node name="grass" type="Sprite" parent="."]
 
 editor/display_folded = true
 transform/pos = Vector2( 48, 208 )
-texture = ExtResource( 11 )
+texture = ExtResource( 15 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass"]
 
@@ -377,7 +489,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 128, 208 )
-texture = ExtResource( 12 )
+texture = ExtResource( 16 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="grass center round"]
 

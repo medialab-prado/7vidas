@@ -1,17 +1,18 @@
-[gd_scene load_steps=25 format=1]
+[gd_scene load_steps=26 format=1]
 
 [ext_resource path="res://Platformer/Ground/Snow/snowLeft.png" type="Texture" id=1]
 [ext_resource path="res://Platformer/Ground/Snow/snowMid.png" type="Texture" id=2]
 [ext_resource path="res://Platformer/Ground/Snow/snowCorner_left.png" type="Texture" id=3]
-[ext_resource path="res://Platformer/Ground/Snow/snowCenter.png" type="Texture" id=4]
-[ext_resource path="res://Platformer/Ground/Snow/snowCliffAlt_left.png" type="Texture" id=5]
-[ext_resource path="res://Platformer/Ground/Snow/snowCliff_left.png" type="Texture" id=6]
-[ext_resource path="res://Platformer/Ground/Snow/snowHalf.png" type="Texture" id=7]
-[ext_resource path="res://Platformer/Ground/Snow/snowHalf_left.png" type="Texture" id=8]
-[ext_resource path="res://Platformer/Ground/Snow/snowHalf_mid.png" type="Texture" id=9]
-[ext_resource path="res://Platformer/Ground/Snow/snowHill_left.png" type="Texture" id=10]
-[ext_resource path="res://Platformer/Ground/Snow/snow.png" type="Texture" id=11]
-[ext_resource path="res://Platformer/Ground/Snow/snowCenter_round.png" type="Texture" id=12]
+[ext_resource path="res://Platformer/Ground/Snow/snowCorner_2.png" type="Texture" id=4]
+[ext_resource path="res://Platformer/Ground/Snow/snowCenter.png" type="Texture" id=5]
+[ext_resource path="res://Platformer/Ground/Snow/snowCliffAlt_left.png" type="Texture" id=6]
+[ext_resource path="res://Platformer/Ground/Snow/snowCliff_left.png" type="Texture" id=7]
+[ext_resource path="res://Platformer/Ground/Snow/snowHalf.png" type="Texture" id=8]
+[ext_resource path="res://Platformer/Ground/Snow/snowHalf_left.png" type="Texture" id=9]
+[ext_resource path="res://Platformer/Ground/Snow/snowHalf_mid.png" type="Texture" id=10]
+[ext_resource path="res://Platformer/Ground/Snow/snowHill_left.png" type="Texture" id=11]
+[ext_resource path="res://Platformer/Ground/Snow/snow.png" type="Texture" id=12]
+[ext_resource path="res://Platformer/Ground/Snow/snowCenter_round.png" type="Texture" id=13]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -157,11 +158,38 @@ polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 
+[node name="snow corner 2" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 207.742, 209.225 )
+texture = ExtResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="snow corner 2"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="snow corner 2/StaticBody2D"]
+
+build_mode = 0
+polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
 [node name="snow center" type="Sprite" parent="."]
 
 editor/display_folded = true
 transform/pos = Vector2( 128, 128 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow center"]
 
@@ -188,7 +216,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 208, 48 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow cliff left"]
 
@@ -215,7 +243,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 288, 48 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow cliff left round"]
 
@@ -242,7 +270,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 208, 128 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow half"]
 
@@ -269,7 +297,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 288, 128 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow half left"]
 
@@ -296,7 +324,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 368, 128 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow half mid"]
 
@@ -323,7 +351,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 368, 48 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow hill left"]
 
@@ -350,7 +378,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 48, 208 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow"]
 
@@ -377,7 +405,7 @@ trigger = false
 
 editor/display_folded = true
 transform/pos = Vector2( 128, 208 )
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="snow center round"]
 

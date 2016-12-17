@@ -233,7 +233,7 @@ autostart = false
 [node name="winner" type="AnimatedSprite" parent="."]
 
 material/use_parent = true
-transform/pos = Vector2( 120.021, -416.176 )
+transform/pos = Vector2( 90.5879, -1105.75 )
 transform/scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
 animation = "default"

@@ -15,7 +15,10 @@ func _ready():
 	camera.reset()
 	hud.reset(map_name, time_limit, true)
 	character.change_actor(default_actor)
-	if not get_node("/root/game"):
+	var game = get_node("/root/game")
+	if game:
+		game.map_initialized = true
+	else:
 		run()
 
 func run():

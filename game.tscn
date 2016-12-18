@@ -6,7 +6,7 @@
 
 script/script = ExtResource( 1 )
 __meta__ = { "_edit_group_":true, "_edit_lock_":true }
-medialab_facade = true
+medialab_facade = false
 control_method = "network"
 
 [node name="container" type="Container" parent="."]
@@ -44,6 +44,13 @@ wait_time = 0.05
 one_shot = true
 autostart = false
 
+[node name="network error timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
 [node name="next map timer" type="Timer" parent="."]
 
 process_mode = 1
@@ -57,6 +64,8 @@ process_mode = 1
 wait_time = 3.0
 one_shot = true
 autostart = false
+
+[connection signal="timeout" from="network error timer" to="." method="_on_network_error_timeout"]
 
 [connection signal="timeout" from="next map timer" to="." method="_on_next_map_timeout"]
 

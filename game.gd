@@ -21,6 +21,7 @@ var extra_actors = ["giraffe", "hippo", "parrot", "pig"]
 var maps = []
 var current_map = 0
 var net_input_timer
+var net_error_timer
 var prev_jump_val1 = 1
 var prev_jump_val2 = 1
 var dead_zone = 0.2
@@ -30,6 +31,7 @@ var hud_path = "map/hud"
 var map_container
 var next_map_timer
 var start_map_timer
+var map_initialized = false
 
 func _ready():
 	next_map_timer = get_node("next map timer")
@@ -55,6 +57,7 @@ func _ready():
 
 	if control_method == "network":
 		net_input_timer = get_node("network input timer")
+		net_error_timer = get_node("network error timer")
 		if packet_peer.listen(port) != OK:
 			print("Network: Error listening on port ", port)
 
@@ -64,8 +67,21 @@ func _ready():
 func _process(delta):
 	if control_method == "network":
 		if packet_peer.is_listening():
+			var num_packets = 0
 			while packet_peer.get_available_packet_count() > 0:
 				process_packet(packet_peer.get_packet())
+				num_packets += 1
+				if num_packets > 100:
+					packet_peer.close()
+					break
+		else:
+			if net_error_timer.get_time_left() == 0:
+				net_error_timer.start()
+
+func _on_network_error_timeout():
+	packet_peer = PacketPeerUDP.new()
+	if packet_peer.listen(port) != OK:
+		print("Network: Error listening on port ", port)
 
 func process_packet(packet):
 	# This is not the OSC protocol but an ASCII packet resembling the OSC format,
@@ -74,6 +90,12 @@ func process_packet(packet):
 	# print("DEBUG: packet received: ", packet.get_string_from_ascii())
 	var fields = packet.get_string_from_ascii().split(" ", 0)
 	if fields.size() < 2:
+		return
+
+	if not map_initialized:
+		rotation = 0
+		prev_jump_val1 = 1
+		prev_jump_val2 = 1
 		return
 
 	var address = fields[0]
@@ -98,7 +120,7 @@ func process_packet(packet):
 				rotation = (rotation + new_rotation) / 2
 		else:
 			rotation = 0
-	
+
 		get_node(camera_path).set_wanted_rotation(rotation)
 	
 	elif address == "/GameBlob2": # Jump
@@ -119,7 +141,7 @@ func get_control_method():
 	return control_method
 
 func start_game():
-	lives = 5
+	lives = 2
 	map_container.get_node("initial scene").queue_free()
 	map_container.add_child(maps[current_map].instance())
 	start_map_timer.start()
@@ -140,6 +162,7 @@ func extra_life():
 	return extra_actors[int(rand_range(0, extra_actors.size() - 1))]
 
 func _on_next_map_timeout():
+	map_initialized = false
 	var old_map = get_node(map_path)
 	map_container.remove_child(old_map)
 	old_map.free()

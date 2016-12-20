@@ -141,7 +141,8 @@ func get_control_method():
 	return control_method
 
 func start_game():
-	lives = 2
+	lives = 3
+	current_map = 0
 	map_container.get_node("initial scene").queue_free()
 	map_container.add_child(maps[current_map].instance())
 	start_map_timer.start()

@@ -50,7 +50,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
 map_name = "Desert"
-time_limit = 40
+time_limit = 50
 default_actor = "snake"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

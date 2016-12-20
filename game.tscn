@@ -6,7 +6,7 @@
 
 script/script = ExtResource( 1 )
 __meta__ = { "_edit_group_":true, "_edit_lock_":true }
-medialab_facade = false
+medialab_facade = true
 control_method = "network"
 
 [node name="container" type="Container" parent="."]

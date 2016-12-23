@@ -4,6 +4,7 @@
 
 [node name="game" type="Node"]
 
+editor/display_folded = true
 script/script = ExtResource( 1 )
 __meta__ = { "_edit_group_":true, "_edit_lock_":true }
 medialab_facade = true

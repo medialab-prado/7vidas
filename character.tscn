@@ -137,6 +137,7 @@ __meta__ = { "_edit_group_":true }
 transform/pos = Vector2( 0, -1 )
 frames = SubResource( 2 )
 animation = "default"
+frame = 3
 
 [node name="animation" type="AnimationPlayer" parent="sprite"]
 

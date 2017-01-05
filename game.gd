@@ -54,6 +54,7 @@ func _ready():
 	maps.append(load("res://map01.tscn"))
 	maps.append(load("res://map02.tscn"))
 	maps.append(load("res://map03.tscn"))
+	maps.append(load("res://map04.tscn"))
 
 	if control_method == "network":
 		net_input_timer = get_node("network input timer")
@@ -133,7 +134,7 @@ func process_packet(packet):
 		var jump_val1 = clamp(fields[2].to_float(), 0, 1)
 		var jump_val2 = clamp(fields[3].to_float(), 0, 1)
 		if jump_val1 > prev_jump_val1 + 0.02 or jump_val2 > prev_jump_val2 + 0.02:
-			get_node(map_path).get_node("character").jump(400, 0, false)
+			get_node(map_path).get_node("character").jump(-500, 0, false)
 		prev_jump_val1 = jump_val1
 		prev_jump_val2 = jump_val2
 

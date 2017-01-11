@@ -40,7 +40,7 @@ func _ready():
 func _process(delta):
 	if not game or game.get_control_method() == "keyboard":
 		if Input.is_action_pressed("jump"):
-			jump(400, 0, false)
+			jump(200, 0, false)
 
 func _integrate_forces(state):
 	var lv = get_linear_velocity()

@@ -1,11 +1,27 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://init.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/kenpixel_future64.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://Character/rabbit2.png" type="Texture" id=2]
+[ext_resource path="res://Character/rabbit1.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/kenpixel_future64.fnt" type="BitmapFont" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+shader/shading_mode = 0
 
 [node name="initial scene" type="Node2D"]
 
 script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 530.895, 364.291 )
+texture = ExtResource( 2 )
+
+[node name="RotaChar1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 554.274, 526.066 )
+texture = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -16,16 +32,69 @@ autostart = true
 
 [node name="Label" type="Label" parent="."]
 
+material/material = SubResource( 1 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 116.0
-margin/top = 120.0
-margin/right = 642.0
-margin/bottom = 135.0
-custom_fonts/font = ExtResource( 2 )
-text = "Game over"
+margin/left = 206.0
+margin/top = 95.0
+margin/right = 558.0
+margin/bottom = 151.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 0.560784, 0, 1 )
+text = "Insert"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label1" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 132.0
+margin/top = 168.0
+margin/right = 604.0
+margin/bottom = 224.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 0.5625, 0, 1 )
+text = " Players"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="InstruccionesRot" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 38.0
+margin/top = 501.0
+margin/right = 934.0
+margin/bottom = 557.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Move    [<          >]"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="InstruccionesJump" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 38.0
+margin/top = 336.0
+margin/right = 718.0
+margin/bottom = 419.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Jump       [    ]"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

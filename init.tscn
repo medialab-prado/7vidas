@@ -1,27 +1,95 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://init.gd" type="Script" id=1]
 [ext_resource path="res://Character/rabbit2.png" type="Texture" id=2]
 [ext_resource path="res://Character/rabbit1.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/kenpixel_future64.fnt" type="BitmapFont" id=4]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="Animation" id=4]
+
+resource/name = "JUMP"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 0.353553, 2.21914, 1 ), "update":0, "values":[ Vector2( 530.895, 375.544 ), Vector2( 530.895, 336.544 ), Vector2( 530.895, 375.544 ) ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:transform/rot")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 0.0, 0.0, 0.0 ] }
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "MOVE"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 482.274, 529.091 ), Vector2( 642.274, 529.091 ), Vector2( 482.274, 529.091 ) ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:transform/rot")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 0.0, 0.0, 0.0 ] }
+
+[sub_resource type="CanvasItemMaterial" id=3]
 
 shader/shading_mode = 0
+
+[sub_resource type="Animation" id=6]
+
+resource/name = "Flickering"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.2, 0.4, 1 ), "transitions":FloatArray( 1, 4, 1, 1 ), "update":1, "values":[ Vector2( 208, 93 ), Vector2( 208, -108 ), Vector2( 208, 93 ), Vector2( 208, 93 ) ] }
 
 [node name="initial scene" type="Node2D"]
 
 script/script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="JumpSprite" type="Sprite" parent="."]
 
-transform/pos = Vector2( 530.895, 364.291 )
+transform/pos = Vector2( 530.895, 375.544 )
 texture = ExtResource( 2 )
 
-[node name="RotaChar1" type="Sprite" parent="."]
+[node name="AnimationJump" type="AnimationPlayer" parent="JumpSprite"]
 
-transform/pos = Vector2( 554.274, 526.066 )
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/JUMP = SubResource( 4 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="MoveSprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 482.274, 529.091 )
 texture = ExtResource( 3 )
+
+[node name="AnimationMove" type="AnimationPlayer" parent="MoveSprite"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/MOVE = SubResource( 5 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -30,23 +98,34 @@ wait_time = 4.0
 one_shot = true
 autostart = true
 
-[node name="Label" type="Label" parent="."]
+[node name="LabelInsert" type="Label" parent="."]
 
-material/material = SubResource( 1 )
+material/material = SubResource( 3 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 206.0
-margin/top = 95.0
-margin/right = 558.0
-margin/bottom = 151.0
+margin/left = 208.0
+margin/top = 93.0
+margin/right = 560.0
+margin/bottom = 149.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 1, 0.560784, 0, 1 )
 text = "Insert"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="AnimationInsert" type="AnimationPlayer" parent="LabelInsert"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Flickering = SubResource( 6 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
 [node name="Label1" type="Label" parent="."]
 
@@ -89,9 +168,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 38.0
-margin/top = 336.0
+margin/top = 355.0
 margin/right = 718.0
-margin/bottom = 419.0
+margin/bottom = 438.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Jump       [    ]"

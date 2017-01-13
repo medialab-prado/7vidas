@@ -83,6 +83,26 @@ func _on_network_error_timeout():
 	packet_peer = PacketPeerUDP.new()
 	if packet_peer.listen(port) != OK:
 		print("Network: Error listening on port ", port)
+		
+func check_player_activity(fields):
+	var address = fields[0]
+	if address == "/GameBlob2": # Jump
+		if fields.size() != 6:
+			return
+		var type = fields[1]
+		if type != "ffff":
+			return
+	
+		var jump_val1 = clamp(fields[2].to_float(), 0, 1)
+		var jump_val2 = clamp(fields[3].to_float(), 0, 1)
+		print("jump_val1",jump_val1)
+		print("jump_val2",jump_val2)
+		print("prev_jump_val1",prev_jump_val1)
+		print("prev_jump_val2",prev_jump_val2)
+		if jump_val1 != prev_jump_val1 or jump_val2 != prev_jump_val2:
+			map_container.get_node("initial scene").on_players_waiting()
+		prev_jump_val1 = jump_val1
+		prev_jump_val2 = jump_val2
 
 func process_packet(packet):
 	# This is not the OSC protocol but an ASCII packet resembling the OSC format,
@@ -93,13 +113,16 @@ func process_packet(packet):
 	if fields.size() < 2:
 		return
 
+	var address = fields[0]
+
 	if not map_initialized:
 		rotation = 0
 		prev_jump_val1 = 1
 		prev_jump_val2 = 1
+		check_player_activity(fields)
 		return
 
-	var address = fields[0]
+	
 	if address == "/GameBlob": # Rotation
 		if fields.size() != 6:
 			return

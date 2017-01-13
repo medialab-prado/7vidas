@@ -4,6 +4,8 @@ var game
 var animJump
 var animMove
 var animInsert
+var mytimer
+var is_waiting = false
 
 func _ready():
 	game = get_node("/root/game")
@@ -22,3 +24,17 @@ func _ready():
 
 func _on_timeout():
 	game.start_game()
+
+func on_players_waiting():
+	print("on_players_waiting WWEI")
+	mytimer = get_node("Timer")
+	var aux_time_left = mytimer.get_time_left()
+	if aux_time_left < mytimer.get_wait_time() - 5:
+		game.start_game()
+		print("game.start_game() WWEI")
+	else:
+		if not is_waiting:
+			mytimer.stop()
+			mytimer.set_wait_time(3)
+			mytimer.start()
+		is_waiting = true

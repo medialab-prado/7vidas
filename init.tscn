@@ -5,7 +5,7 @@
 [ext_resource path="res://Character/rabbit1.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/kenpixel_future64.fnt" type="BitmapFont" id=4]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 
 resource/name = "JUMP"
 length = 1.0
@@ -22,7 +22,7 @@ tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 0.0, 0.0, 0.0 ] }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 
 resource/name = "MOVE"
 length = 1.0
@@ -43,7 +43,7 @@ tracks/1/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 1, 
 
 shader/shading_mode = 0
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 
 resource/name = "Flickering"
 length = 1.0
@@ -69,7 +69,7 @@ texture = ExtResource( 2 )
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/JUMP = SubResource( 4 )
+anims/JUMP = SubResource( 1 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -85,7 +85,7 @@ texture = ExtResource( 3 )
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/MOVE = SubResource( 5 )
+anims/MOVE = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -94,7 +94,7 @@ autoplay = ""
 [node name="Timer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 4.0
+wait_time = 15.0
 one_shot = true
 autostart = true
 
@@ -121,7 +121,7 @@ max_lines_visible = -1
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Flickering = SubResource( 6 )
+anims/Flickering = SubResource( 4 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

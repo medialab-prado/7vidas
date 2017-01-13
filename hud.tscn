@@ -237,6 +237,7 @@ transform/pos = Vector2( 120.021, -416.176 )
 transform/scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
 animation = "default"
+frame = 3
 playing = true
 centered = false
 

@@ -16,6 +16,7 @@ var packet_peer = PacketPeerUDP.new()
 
 var rotation = 0
 var initial_scene
+var initial_scene_ready = false
 var lives
 var extra_actors = ["giraffe", "hippo", "parrot", "pig"]
 var maps = []
@@ -117,12 +118,12 @@ func process_packet(packet):
 
 	if not map_initialized:
 		rotation = 0
-		prev_jump_val1 = 1
-		prev_jump_val2 = 1
+		if not initial_scene_ready:
+			prev_jump_val1 = 1
+			prev_jump_val2 = 1
+			return
 		check_player_activity(fields)
-		return
 
-	
 	if address == "/GameBlob": # Rotation
 		if fields.size() != 6:
 			return
@@ -167,6 +168,7 @@ func get_control_method():
 func start_game():
 	lives = 3
 	current_map = 0
+	initial_scene_ready = false
 	map_container.get_node("initial scene").queue_free()
 	map_container.add_child(maps[current_map].instance())
 	start_map_timer.start()

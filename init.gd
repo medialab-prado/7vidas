@@ -20,21 +20,22 @@ func _ready():
 	
 	animInsert = get_node("LabelInsert/AnimationInsert")
 	animInsert.play("Flickering")
-	
+
+	if game:
+		game.initial_scene_ready = true
 
 func _on_timeout():
 	game.start_game()
 
 func on_players_waiting():
 	mytimer = get_node("Timer")
-	var aux_time_left = mytimer.get_time_left()
-	if aux_time_left < mytimer.get_wait_time() - 5:
+	if is_waiting:
+		return
+	var new_time_left = mytimer.get_time_left() - (mytimer.get_wait_time() - 5)
+	if new_time_left < 0.5:
 		game.start_game()
-		print("Restart Game")
 	else:
-		if not is_waiting:
-			mytimer.stop()
-			mytimer.set_wait_time(10)
-			mytimer.start()
-			print("Players Waiting")
+		mytimer.stop()
+		mytimer.set_wait_time(new_time_left)
+		mytimer.start()
 		is_waiting = true

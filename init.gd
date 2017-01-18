@@ -26,15 +26,15 @@ func _on_timeout():
 	game.start_game()
 
 func on_players_waiting():
-	print("on_players_waiting WWEI")
 	mytimer = get_node("Timer")
 	var aux_time_left = mytimer.get_time_left()
 	if aux_time_left < mytimer.get_wait_time() - 5:
 		game.start_game()
-		print("game.start_game() WWEI")
+		print("Restart Game")
 	else:
 		if not is_waiting:
 			mytimer.stop()
-			mytimer.set_wait_time(3)
+			mytimer.set_wait_time(10)
 			mytimer.start()
+			print("Players Waiting")
 		is_waiting = true

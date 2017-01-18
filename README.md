@@ -6,4 +6,4 @@ Physics based platformer game for the Medialab facade.
 
 Screenshot taken from the initial commit. The game it's a work in progress and the final design may vary.
 
-Check more pics at [Flickr "7Vidas"](http://bit.ly/2iJDRDE). how 7Vidas is being played by public in Medialab-Prado Facade
+Check more pics at [Flickr "7Vidas"](http://bit.ly/2iJDRDE)

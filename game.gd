@@ -123,6 +123,7 @@ func process_packet(packet):
 			prev_jump_val2 = 1
 			return
 		check_player_activity(fields)
+		return
 
 	if address == "/GameBlob": # Rotation
 		if fields.size() != 6:

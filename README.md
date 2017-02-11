@@ -6,4 +6,4 @@ Physics based platformer game for the Medialab facade.
 
 Players interacting with 7vidas game at Plaza de las Letras, Madrid.
 
-Check more pics at [Flickr "7Vidas"](http://bit.ly/2iJDRDE)
+Check more pics at [Flickr "7Vidas"](https://www.flickr.com/gp/49049102@N07/q58cij)

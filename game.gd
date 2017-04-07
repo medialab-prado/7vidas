@@ -33,6 +33,8 @@ var map_container
 var next_map_timer
 var start_map_timer
 var map_initialized = false
+var lastV1 = Vector2(0,0)
+var lastV2 = Vector2(0,0)
 
 func _ready():
 	next_map_timer = get_node("next map timer")
@@ -105,6 +107,12 @@ func check_player_activity(fields):
 		prev_jump_val1 = jump_val1
 		prev_jump_val2 = jump_val2
 
+func rotateScenario(rotAngleV21):
+		var rotationV21 = atan2(V21.x, V21.y)
+		if rotationV21 != rotation
+			rotation = rotationV21
+			get_node(camera_path).set_wanted_rotation(rotationV21)
+
 func process_packet(packet):
 	# This is not the OSC protocol but an ASCII packet resembling the OSC format,
 	# which is much easier to handle within Godot.
@@ -125,29 +133,34 @@ func process_packet(packet):
 		check_player_activity(fields)
 		return
 
-	if address == "/GameBlob": # Rotation
+	if address == "/GameBlob": # Rotation User 1
 		if fields.size() != 6:
 			return
 		var type = fields[1]
 		if type != "ffff":
 			return
-	
-		var value = clamp((fields[2].to_float() - 0.5) * 2, -1, 1)
-		if abs(value) > dead_zone:
-			var new_rotation = 0
-			if value > 0:
-				new_rotation = (value - dead_zone) * 1.97
-			else:
-				new_rotation = (value + dead_zone) * 1.97
-			if net_input_timer.get_time_left() == 0:
-				rotation = new_rotation
-				net_input_timer.start()
-			else:
-				rotation = (rotation + new_rotation) / 2
-		else:
-			rotation = 0
 
-		get_node(camera_path).set_wanted_rotation(rotation)
+		var valueV1 = clamp((fields[3].to_float() - 0.5) * 2, -1, 1) //#y1-> [0..1]
+		lastValueV1 = valueV1
+		#TODO check there are 2 people to rot in this mode. May be except two blob new data to process movement
+		var V21 =  lastValueV2 - lastValueV1
+		rotateScenario(V21)
+		
+		#old
+		#var value = clamp((fields[2].to_float() - 0.5) * 2, -1, 1) //y1-> [0..1]
+		#if abs(value) > dead_zone:
+		#	var new_rotation = 0
+		#	if value > 0:
+		#		new_rotation = (value - dead_zone) * 1.97
+		#	else:
+		#		new_rotation = (value + dead_zone) * 1.97
+		#	if net_input_timer.get_time_left() == 0:
+		#		rotation = new_rotation
+		#		net_input_timer.start()
+		#	else:
+		#		rotation = (rotation + new_rotation) / 2
+		#else:
+		#	rotation = 0
 	
 	elif address == "/GameBlob2": # Jump
 		if fields.size() != 6:
@@ -156,12 +169,23 @@ func process_packet(packet):
 		if type != "ffff":
 			return
 
-		var jump_val1 = clamp(fields[2].to_float(), 0, 1)
-		var jump_val2 = clamp(fields[3].to_float(), 0, 1)
-		if jump_val1 > prev_jump_val1 + 0.02 or jump_val2 > prev_jump_val2 + 0.02:
-			get_node(map_path).get_node("character").jump(200, 0, false)
-		prev_jump_val1 = jump_val1
-		prev_jump_val2 = jump_val2
+		var valueV2 = clamp((fields[3].to_float() - 0.5) * 2, -1, 1)#y1-> [0..1]
+		lastValueV2 = valueV2
+		var V21 =  lastValueV2 - lastValueV1
+		rotateScenario(V21)
+
+		#old
+		#if fields.size() != 6:
+		#	return
+		#var type = fields[1]
+		#if type != "ffff":
+		#	return
+
+		#var valueV2 = clamp((fields[3].to_float() - 0.5) * 2, -1, 1) //y1-> [0..1]
+		#if jump_val1 > prev_jump_val1 + 0.02 or jump_val2 > prev_jump_val2 + 0.02:
+		#	get_node(map_path).get_node("character").jump(200, 0, false)
+		#prev_jump_val1 = jump_val1
+		#prev_jump_val2 = jump_val2
 
 func get_control_method():
 	return control_method
